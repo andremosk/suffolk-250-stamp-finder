@@ -1,0 +1,13 @@
+{
+  "name": "suffolk-250-stamp-finder",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Suffolk County America 250 passport stamp finder",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

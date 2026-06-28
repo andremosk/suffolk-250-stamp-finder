@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Long Island 250 Stamp Finder — passport sites, hours & what's open</title>
+<meta name="description" content="A filterable directory of all 100 sites in the Long Island 250th Anniversary Revolutionary passport, across Suffolk and Nassau. Enter your address to rank sites by distance, or pick any summer date to see what's open.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Bitter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --linen:#EDE6D6; --linen-2:#E4DAC6; --paper:#F6F1E6;
+  --ink:#211C16; --ink-soft:#4A4136;
+  --blue:#2C4A6E; --blue-deep:#1E3450;
+  --oxblood:#8B3A2F; --oxblood-soft:#A8534660;
+  --gold:#A9853F;
+  --line:#C9BCA1; --line-soft:#D8CDB6;
+  --ok:#3F6B4B; --ok-bg:#E2ECDE;
+  --warn:#9A6A2A; --warn-bg:#F0E5CE;
+  --quiet:#6E6354; --quiet-bg:#E7DFCD;
+  --shadow:0 1px 0 #fff8, 0 2px 14px #2b231510;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Spectral',Georgia,serif;background:var(--linen);color:var(--ink);
+  line-height:1.55;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(#00000006 1px,transparent 1px);background-size:4px 4px;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* Masthead */
+header.masthead{border-bottom:2px solid var(--ink);background:var(--paper)}
+.masthead-inner{padding:26px 20px 22px;max-width:1080px;margin:0 auto}
+.eyebrow{font-family:'Bitter',sans-serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--oxblood);font-weight:700;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';height:1px;flex:0 0 28px;background:var(--oxblood)}
+h1.title{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(30px,6vw,54px);line-height:1.02;letter-spacing:-.01em;margin:8px 0 6px}
+h1.title em{font-style:italic;color:var(--blue)}
+.dek{font-size:clamp(14px,2.3vw,17px);color:var(--ink-soft);max-width:62ch;font-style:italic}
+.rule-1776{display:flex;align-items:baseline;gap:14px;margin-top:14px;font-family:'Bitter',sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--quiet)}
+.rule-1776 .yr{font-family:'DM Serif Display';font-size:20px;letter-spacing:0;color:var(--oxblood)}
+.rule-1776 .ln{flex:1;height:1px;background:var(--line)}
+.byline{display:flex;justify-content:flex-end;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.byline-txt{font-family:'Bitter',sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--quiet)}
+.byline-txt b{color:var(--ink-soft);font-weight:700}
+.contact-btn{display:inline-flex;align-items:center;gap:7px;font-family:'Bitter',sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);text-decoration:none;border:1px solid var(--line);background:var(--linen-2);border-radius:2px;padding:6px 11px;transition:background .12s,border-color .12s}
+.contact-btn:hover{background:var(--blue);color:#F6F1E6;border-color:var(--blue)}
+.contact-btn svg{flex:0 0 14px}
+
+/* intro / about link */
+.intro-row{margin-top:12px}
+.intro-lead{font-size:14px;color:var(--ink-soft)}
+.link-btn{font-family:'Spectral';font-size:14px;color:var(--oxblood);background:none;border:none;border-bottom:1px solid var(--oxblood-soft,#A8534660);cursor:pointer;padding:0 0 1px;font-style:italic}
+.link-btn:hover{color:var(--blue);border-color:var(--blue)}
+
+/* tri-color ribbon under masthead */
+.ribbon{height:3px;display:flex}
+.ribbon i{flex:1}
+.ribbon .r{background:var(--oxblood)}
+.ribbon .w{background:#EDE6D6}
+.ribbon .b{background:var(--blue)}
+
+/* About modal */
+.modal-veil{position:fixed;inset:0;background:#1c160fcc;display:flex;align-items:flex-start;justify-content:center;padding:40px 18px;z-index:100;overflow-y:auto;backdrop-filter:blur(2px)}
+.modal-veil[hidden]{display:none}
+.modal{background:var(--paper);border:1px solid var(--ink);border-radius:4px;max-width:580px;width:100%;padding:30px 30px 26px;position:relative;box-shadow:0 20px 60px #00000040;background-image:radial-gradient(#00000005 1px,transparent 1px);background-size:5px 5px}
+.modal-x{position:absolute;top:12px;right:14px;border:none;background:none;font-size:28px;line-height:1;color:var(--quiet);cursor:pointer;padding:4px}
+.modal-x:hover{color:var(--oxblood)}
+.modal-flag{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.modal-flag .star,.modal-card-h .star{color:var(--oxblood);font-size:13px}
+.modal-kicker{font-family:'Bitter';font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.modal-h{font-family:'DM Serif Display';font-size:30px;line-height:1.1;margin-bottom:14px;color:var(--ink)}
+.modal-h sup{font-size:.5em;color:var(--oxblood)}
+.modal p{font-size:14.5px;color:var(--ink-soft);line-height:1.65;margin-bottom:12px}
+.modal b{color:var(--ink)}
+.modal-card{background:var(--linen-2);border:1px solid var(--line);border-radius:3px;padding:15px 17px;margin:16px 0}
+.modal-card-h{font-family:'Bitter';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.getlist{list-style:none;display:flex;flex-direction:column;gap:8px}
+.getlist li{font-size:14px;color:var(--ink-soft);line-height:1.5;padding-left:16px;position:relative}
+.getlist li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;background:var(--blue);transform:rotate(45deg)}
+.getlist a{color:var(--blue);text-decoration:none;border-bottom:1px solid #c2d0e0}
+.getlist a:hover{color:var(--oxblood);border-color:var(--oxblood)}
+.muted{color:var(--quiet);font-size:.92em}
+.modal-foot{font-size:12.5px!important;color:var(--quiet)!important;border-top:1px solid var(--line-soft);padding-top:12px;margin-top:4px}
+.modal-foot a{color:var(--blue)}
+
+/* Controls */
+.controls{position:sticky;top:0;z-index:30;background:var(--linen);border-bottom:1px solid var(--line);box-shadow:0 6px 18px -14px #2b2315}
+.controls-inner{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;flex-direction:column;gap:11px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.field{display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:8px 12px}
+.field svg{flex:0 0 16px;opacity:.5}
+.field input{border:none;background:none;outline:none;width:100%;font-family:'Spectral';font-size:15px;color:var(--ink)}
+.field input::placeholder{color:var(--quiet);font-style:italic}
+.addr-field{flex:1 1 300px}
+.search-field{flex:1 1 200px}
+.btn{font-family:'Bitter';font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:9px 14px;border:1px solid var(--blue);background:var(--blue);color:#F6F1E6;cursor:pointer;border-radius:2px;white-space:nowrap;transition:background .12s}
+.btn:hover{background:var(--blue-deep)}
+.btn.ghost{background:none;color:var(--ink-soft);border-color:var(--line)}
+.btn.ghost:hover{background:var(--linen-2)}
+.seg{display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden;background:var(--paper);flex-wrap:wrap}
+.seg button{font-family:'Bitter';font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:8px 11px;border:none;background:none;cursor:pointer;color:var(--ink-soft);border-right:1px solid var(--line-soft);transition:background .12s,color .12s;white-space:nowrap}
+.seg button:last-child{border-right:none}
+.seg button[aria-pressed=true]{background:var(--blue);color:#F6F1E6}
+.seg button:hover:not([aria-pressed=true]){background:var(--linen-2)}
+.dateField{display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:7px 12px}
+.dateField input[type=date]{border:none;background:none;outline:none;font-family:'Bitter';font-size:12px;color:var(--ink);letter-spacing:.03em}
+.dateField label{font-family:'Bitter';font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet)}
+select.town{font-family:'Bitter';font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;padding:8px 30px 8px 12px;border:1px solid var(--line);border-radius:2px;background:var(--paper);color:var(--ink-soft);cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236E6354' fill='none' stroke-width='1.4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center}
+.origin-pill{font-family:'Bitter';font-size:11px;letter-spacing:.04em;color:var(--blue);background:#E0E7F0;border:1px solid #c2d0e0;border-radius:2px;padding:6px 10px;display:none;align-items:center;gap:8px}
+.origin-pill b{font-weight:700}
+.origin-pill button{border:none;background:none;color:var(--oxblood);cursor:pointer;font-size:14px;line-height:1;padding:0}
+.count-line{font-family:'Bitter';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet)}
+.count-line b{color:var(--oxblood);font-weight:700}
+.geo-msg{font-family:'Bitter';font-size:11px;letter-spacing:.04em;color:var(--oxblood);display:none}
+
+/* Grid + cards */
+main{padding:26px 0 60px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .12s,box-shadow .12s}
+.card:hover{transform:translateY(-2px);box-shadow:0 1px 0 #fff8,0 10px 26px #2b231522}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:14px 16px 10px;border-bottom:1px dashed var(--line)}
+.pg{font-family:'Bitter';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);border:1px solid var(--line);border-radius:2px;padding:2px 6px;white-space:nowrap;flex:0 0 auto}
+.name{font-family:'Bitter';font-weight:700;font-size:16.5px;line-height:1.18;letter-spacing:-.005em}
+.card-body{padding:12px 16px 14px;display:flex;flex-direction:column;gap:10px;flex:1}
+.toprow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.dist{font-family:'Bitter';font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--oxblood);font-weight:600;white-space:nowrap}
+
+/* structured info table */
+.facts-wrap{display:flex;flex-direction:column;gap:5px}
+.facts-title{font-family:'Bitter';font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--oxblood);font-weight:700;display:flex;align-items:center;gap:7px}
+.facts-title::before{content:'\2605';font-size:9px;color:var(--oxblood);opacity:.7}
+.facts-title::after{content:'';flex:1;height:1px;background:var(--line-soft)}
+.facts{display:flex;flex-direction:column;gap:0;border:1px solid var(--line-soft);border-radius:2px;overflow:hidden}
+.fact{display:flex;gap:0;border-bottom:1px solid var(--line-soft);background:#FBF7EC}
+.fact:last-child{border-bottom:none}
+.fact .k{flex:0 0 78px;font-family:'Bitter';font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--quiet);padding:7px 8px;background:var(--linen-2);border-right:1px solid var(--line-soft);display:flex;align-items:center}
+.fact .v{flex:1;padding:7px 10px;font-size:13.5px;color:var(--ink);line-height:1.4;display:flex;align-items:center}
+.fact .v.days{gap:3px;flex-wrap:wrap}
+.daypill{font-family:'Bitter';font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;padding:2px 5px;border-radius:2px;background:var(--ok-bg);color:var(--ok);border:1px solid #bcd2bd}
+.daypill.off{background:#EDE6D6;color:#B3A88E;border-color:#dcd0b6}
+
+.note{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+.special{font-size:12.5px;color:var(--blue-deep);line-height:1.45;display:flex;gap:7px;align-items:flex-start;background:#E9EEF4;border-left:2px solid var(--blue);padding:6px 9px;border-radius:0 2px 2px 0}
+.special .ic{flex:0 0 13px;margin-top:2px;opacity:.7}
+.discrepancy{font-size:12.5px;color:#7a4b15;line-height:1.45;display:flex;gap:7px;align-items:flex-start;background:#F6E9CE;border-left:2px solid var(--warn);padding:6px 9px;border-radius:0 2px 2px 0}
+.discrepancy .ic{flex:0 0 13px;margin-top:2px;opacity:.85;color:var(--warn)}
+.discrepancy b{color:#5e3a10}
+.meta{display:flex;flex-direction:column;gap:4px;margin-top:2px;padding-top:10px;border-top:1px solid var(--line-soft)}
+.meta a{font-size:12.5px;color:var(--ink-soft);text-decoration:none;display:flex;align-items:flex-start;gap:7px;line-height:1.45}
+.meta a:hover{color:var(--blue);text-decoration:underline}
+.meta .ic{flex:0 0 13px;margin-top:2px;opacity:.55}
+
+.seal{font-family:'Bitter';font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:2px;white-space:nowrap;border:1px solid transparent}
+.s-open{background:var(--ok-bg);color:var(--ok);border-color:#bcd2bd}
+.s-closed-today{background:#EFE0DD;color:var(--oxblood);border-color:#dcc2bc}
+.s-event{background:var(--warn-bg);color:var(--warn);border-color:#e0cfa3}
+.s-call{background:var(--quiet-bg);color:var(--quiet);border-color:#cfc3a8}
+.s-unknown{background:#E9E3D4;color:#8A8068;border-color:#d4cab2}
+
+.tbd{font-family:'Bitter';font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--quiet)}
+.empty{text-align:center;padding:70px 20px;color:var(--ink-soft);font-style:italic;font-size:16px}
+.empty b{display:block;font-family:'DM Serif Display';font-style:normal;font-size:22px;color:var(--ink);margin-bottom:6px}
+
+footer{border-top:2px solid var(--ink);background:var(--paper);padding:24px 20px;margin-top:20px}
+.foot-inner{max-width:1080px;margin:0 auto;font-size:13px;color:var(--quiet);line-height:1.6}
+.foot-inner b{color:var(--ink-soft)}
+.foot-inner a{color:var(--blue)}
+
+@media (max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .stat{min-width:50%;flex:1 1 40%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="byline">
+      <span class="byline-txt">Built by <b>Andre Moskowitz</b></span>
+      <a class="contact-btn" href="mailto:andre.moskowitz@gmail.com?subject=Long%20Island%20250%20Stamp%20Finder%20%E2%80%94%20question%2Fsuggestion">
+        <svg viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 4l6 4.5L14 4" stroke="currentColor" stroke-width="1.3"/></svg>
+        Questions or suggestions
+      </a>
+    </div>
+    <div class="eyebrow"><span>Long Island, New York &middot; Suffolk &amp; Nassau</span></div>
+    <h1 class="title">The Stamp&nbsp;Finder<em>.</em></h1>
+    <p class="dek">All 100 sites in Long Island&rsquo;s 250th&nbsp;Anniversary Revolutionary passport &mdash; across Suffolk and Nassau. Enter your address to sort by distance, or pick any summer date to see exactly what&rsquo;s open that day.</p>
+    <div class="rule-1776"><span class="yr">1776</span><span class="ln"></span><span class="yr">2026</span></div>
+    <div class="intro-row">
+      <p class="intro-lead">New to the passport? <button class="link-btn" id="aboutOpen">What is this &amp; where to get a book &rarr;</button></p>
+    </div>
+  </div>
+</header>
+<div class="ribbon" aria-hidden="true"><i class="r"></i><i class="w"></i><i class="b"></i></div>
+
+<div class="modal-veil" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
+  <div class="modal">
+    <button class="modal-x" id="aboutClose" aria-label="Close">&times;</button>
+    <div class="modal-flag" aria-hidden="true">
+      <span class="star">&#9733;</span>
+      <span class="modal-kicker">Long Island&rsquo;s Path to Independence</span>
+    </div>
+    <h2 id="aboutTitle" class="modal-h">The Long Island 250<sup>th</sup> Passport</h2>
+    <p>To mark <b>250 years</b> since the signing of the Declaration of Independence, the Suffolk County 250th committee created a commemorative <i>Revolutionary Historical Passport</i> &mdash; a booklet that turns Long Island&rsquo;s Revolutionary War history into a stamp-collecting adventure. The sites span the whole island, <b>Suffolk and Nassau alike</b>. Long Island was no bystander: from the <b>Culper Spy Ring</b> of Setauket that fed intelligence to General Washington, to the British-occupied South Shore, these 100+ sites each played a part in the nation&rsquo;s founding.</p>
+    <p>Carry the passport to participating museums, historic homes, and landmarks. At each one you collect a <b>unique stamp</b> &mdash; building a personal record of your journey through the county&rsquo;s Revolutionary past. It&rsquo;s built for families, students, and history buffs alike.</p>
+
+    <div class="modal-card">
+      <div class="modal-card-h"><span class="star">&#9733;</span> How to get a passport book</div>
+      <ul class="getlist">
+        <li><b>Free PDF</b> &mdash; download and print at home from <a href="https://suffolkcountyny.gov/Portals/0/formsdocs/suffolk250/Passport%20Book%20Free%20Download%20v8.pdf" target="_blank" rel="noopener">suffolkcountyny.gov</a>.</li>
+        <li><b>Printed copy</b> &mdash; order online from <a href="https://www.amazon.com/s?k=Long+Island+Path+to+Independence+passport" target="_blank" rel="noopener">Amazon</a>, <a href="https://www.barnesandnoble.com/s/long%20island%20path%20to%20independence" target="_blank" rel="noopener">Barnes &amp; Noble Online</a>, or <a href="https://www.lulu.com/search?q=Long+Island+Path+to+Independence" target="_blank" rel="noopener">Lulu.com</a> <span class="muted">(B&amp;N online only, not in stores)</span>.</li>
+        <li>A limited number of paperbacks are also sold at some participating sites &mdash; ask when you visit.</li>
+      </ul>
+    </div>
+
+    <p class="modal-foot">Official hub &amp; live event calendar: <a href="https://www.suffolk250.org" target="_blank" rel="noopener">suffolk250.org</a>. This finder is an independent community guide to help you plan your stops.</p>
+  </div>
+</div>
+
+<section class="controls">
+  <div class="controls-inner">
+    <div class="row">
+      <label class="field addr-field">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6 3.5 9.5 8 14.5 8 14.5S12.5 9.5 12.5 6C12.5 3.5 10.5 1.5 8 1.5z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
+        <input id="addr" type="text" placeholder="Enter your address to rank sites by distance&hellip;" autocomplete="off">
+      </label>
+      <button class="btn" id="locateBtn">Sort by distance</button>
+      <button class="btn ghost" id="gpsBtn" title="Use my location">Use my location</button>
+      <span class="geo-msg" id="geoMsg"></span>
+      <span class="origin-pill" id="originPill"><span>Nearest to <b id="originName"></b></span><button id="clearOrigin" title="Clear">&times;</button></span>
+    </div>
+    <div class="row">
+      <label class="field search-field">
+        <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5"/></svg>
+        <input id="q" type="search" placeholder="Search a site or town&hellip;" autocomplete="off">
+      </label>
+      <div class="dateField">
+        <label for="datePick">On date</label>
+        <input type="date" id="datePick" min="2026-06-01" max="2026-09-30">
+        <button class="btn ghost" id="clearDate" style="padding:5px 9px">Clear</button>
+      </div>
+      <div class="seg" id="dayseg" role="group" aria-label="Filter by day of week">
+        <button data-day="any" aria-pressed="true">Any day</button>
+        <button data-day="mon" aria-pressed="false">M</button>
+        <button data-day="tue" aria-pressed="false">T</button>
+        <button data-day="wed" aria-pressed="false">W</button>
+        <button data-day="thu" aria-pressed="false">T</button>
+        <button data-day="fri" aria-pressed="false">F</button>
+        <button data-day="sat" aria-pressed="false">S</button>
+        <button data-day="sun" aria-pressed="false">S</button>
+      </div>
+      <select class="town" id="town" aria-label="Filter by town"><option value="">All towns</option></select>
+    </div>
+    <div class="count-line" id="count"></div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" style="display:none"><b>No sites match that.</b>Try clearing the date or day filter, or widening your search.</div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <b>About this guide.</b> Hours come from each site&rsquo;s own website and can change &mdash; small volunteer-run museums especially. Call ahead before a long drive. Sites marked &ldquo;hours to confirm&rdquo; are listed for completeness while their details are verified. Distances are straight-line estimates from the address you enter (or approximate driving miles from central Huntington by default).<br>
+    A community guide for passport holders, independent and not officially affiliated with the 250th committee. Official book at <a href="https://www.suffolk250.org" target="_blank" rel="noopener">suffolk250.org</a>. Address search by <a href="https://www.geoapify.com/" target="_blank" rel="noopener">Geoapify</a>.
+  </div>
+</footer>
+
+<script>
+const SITES=[{"page":42,"name":"The Arsenal","addr":"425 Park Avenue, Huntington","town":"Huntington","lat":40.8682,"lng":-73.4257,"miles":4,"url":"www.huntingtonmilitia.com","phone":"","days":[],"hours":"","kind":"event","special":"Huntington Militia drills & special events; first-Sunday openings not consistently listed","discrepancy":"Open days vary \u2014 some listings show first Sundays 1\u20134pm, the militia's own programming is event-based/by appointment. Confirm via the Huntington Militia before visiting.","season_start":"06-01","season_end":"10-31","dates":[],"note":"A restored powder house and home where the Huntington Militia drills in full Revolutionary kit; costumed muskets and colonial demonstrations.","status":"event","verified":true},{"page":44,"name":"Conklin Farmhouse","addr":"2 High Street, Huntington","town":"Huntington","lat":40.8682,"lng":-73.4257,"miles":4,"url":"www.huntingtonhistoricalsociety.org","phone":"631.427.7045","days":["sun"],"hours":"1:00\u20134:00pm","kind":"regular","special":"Staffed by docents Sundays + by appointment; closed holidays. $5 tour","discrepancy":"Sources disagree on open days (the Historical Society's own site says Sundays; town and other listings say Thu\u2013Sat or Fri & Sun). Call 631-427-7045 to confirm before visiting.","season_start":null,"season_end":null,"dates":[],"note":"The 1750 home of David Conklin, a Huntington patriot jailed by the British for signing the town's defiant 'Association' against the Crown.","status":"regular","verified":true},{"page":45,"name":"Heckscher Museum Of Art","addr":"2 Prime Avenue, Huntington","town":"Huntington","lat":40.8682,"lng":-73.4257,"miles":4,"url":"www.heckscher.org","phone":"631.380.3230","days":["thu","fri","sat","sun"],"hours":"12:00\u20135:00pm","kind":"regular","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Long Island's art museum, set in leafy Heckscher Park, mounting a 250th show of American art alongside its permanent collection.","status":"weekend","verified":true},{"page":47,"name":"Jo-Ann Raia Archives","addr":"100 Main Street, Huntington","town":"Huntington","lat":40.8682,"lng":-73.4257,"miles":4,"url":"www.huntingtonny.gov","phone":"631.351.3035","days":["mon","tue","wed","thu","fri"],"hours":"9:00am\u20134:00pm","kind":"regular","special":"Town of Huntington Archives; weekday business hours, call ahead","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Town of Huntington's archives \u2014 named for longtime Town Clerk Jo-Ann Raia \u2014 safeguard original records dating back to Huntington's 1653 founding, including Revolutionary-era documents.","status":"regular","verified":true},{"page":49,"name":"Ketewamoke Chapter House","addr":"6 Nassau Road, Huntington","town":"Huntington","lat":40.8682,"lng":-73.4257,"miles":4,"url":"www.huntingtondar.org","phone":"","days":[],"hours":"","kind":"event","special":"DAR chapter house \u2014 open by appointment / for events; call ahead","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The 1837 home of the Ketewamoke Chapter of the Daughters of the American Revolution, the oldest DAR chapter on Long Island outside New York City.","status":"event","verified":true},{"page":50,"name":"Lefferts Tide Mill Preserve","addr":"324 West Shore Road, Huntington","town":"Huntington","lat":40.8682,"lng":-73.4257,"miles":4,"url":"www.leffertstidemill.org","phone":"","days":[],"hours":"","kind":"event","special":"Private guided boat tours by advance registration; ages 12+ only","discrepancy":"","season_start":"06-01","season_end":"10-15","dates":[],"note":"A rare c.1793 tide mill \u2014 the last of its kind still on its original site with its original gears \u2014 reached only by a short boat ride across Lloyd Harbor.","status":"event","verified":true},{"page":54,"name":"The Suydam Homestead","addr":"1 Fort Salonga Road, Greenlawn","town":"Greenlawn","lat":40.8662,"lng":-73.3651,"miles":6,"url":"www.greenlawncenterporthistorical.org","phone":"631.754.1180","days":[],"hours":"","kind":"closed","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A 1730s Greenlawn farmhouse currently closed while the historical society recruits volunteers to staff it.","status":"closed","verified":true},{"page":55,"name":"Walt Whitman Birthplace Museum","addr":"246 Old Walt Whitman Road Huntington Station","town":"Huntington Station","lat":40.8526,"lng":-73.4115,"miles":7,"url":"www.waltwhitman.org","phone":"631.427.5240","days":["mon","tue","wed","thu","fri","sat","sun"],"hours":"11:00am\u20134:00pm","kind":"regular","special":"Revolutionary Voices tours on select dates","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The 1819 farmhouse where poet Walt Whitman was born, with period rooms and select Revolutionary-history tour days.","status":"weekend","verified":true},{"page":48,"name":"Joseph Lloyd Manor","addr":"1 Lloyd Lane, Lloyd Harbor","town":"Lloyd Harbor","lat":40.9159,"lng":-73.4593,"miles":8,"url":"www.preservationlongisland.org","phone":"631.692.4664","days":["sat","sun"],"hours":"Guided 11:00am & 12:30pm; self-guided 2:00\u20133:00pm","kind":"regular","special":"Preservation Long Island","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A 1766 manor occupied by the British during the war and once home to Jupiter Hammon, the enslaved poet who became the first published African American writer.","status":"weekend","verified":true},{"page":53,"name":"Suffolk County Vanderbilt Museum","addr":"180 Little Neck Road, Centerport","town":"Centerport","lat":40.8959,"lng":-73.3759,"miles":9,"url":"www.vanderbiltmuseum.org","phone":"631.854.5579","days":["tue","wed","thu","fri","sat","sun"],"hours":"10:00am\u20135:00pm","kind":"regular","special":"Last admission 4:30pm","discrepancy":"","season_start":"06-27","season_end":null,"dates":[],"note":"A waterfront Gold Coast mansion with a planetarium and a marine museum \u2014 the Hall of Fishes and Reichert Planetarium make it a full afternoon for families.","status":"weekend","verified":true},{"page":43,"name":"Cold Spring Harbor Library","addr":"95 Harbor Road, Cold Spring Harbor","town":"Cold Spring Harbor","lat":40.8718,"lng":-73.454,"miles":10,"url":"www.cshlibrary.org","phone":"631.692.6820","days":["mon","tue","wed","thu","fri","sat"],"hours":"Mon\u2013Thu 9:30am\u20139:00pm, Fri\u2013Sat 9:30am\u20135:00pm","kind":"regular","special":"Closed Sundays in summer","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The town library displays three detailed dioramas of Revolutionary-era Cold Spring Harbor, a quiet gem for history-minded kids.","status":"weekend","verified":true},{"page":51,"name":"Northport Historical","addr":"215 Main Street, Northport","town":"Northport","lat":40.9009,"lng":-73.3434,"miles":10,"url":"www.northporthistorical.org","phone":"631.757.9859","days":[],"hours":"","kind":"event","special":"Museum closed until later summer 2026; stamps at event booths (e.g. Huntington Independence Day, Jul 18)","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Northport's history museum is between exhibits this summer, so it's giving out stamps from booths at community events like the July Independence Day celebration.","status":"event","verified":true},{"page":52,"name":"Old Methodist Church","addr":"161 Main Street, Cold Spring Harbor","town":"Cold Spring Harbor","lat":40.8718,"lng":-73.454,"miles":10,"url":"www.preservationlongisland.org","phone":"631.692.4664","days":["wed","thu","fri","sat","sun"],"hours":"Check current exhibition hours","kind":"regular","special":"Preservation LI gallery in the former Methodist church; seasonal house tours through mid-Oct","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Preservation Long Island's exhibition gallery, set in a former 1840s Methodist church, showcasing Long Island decorative arts and a 250th-anniversary furniture exhibition.","status":"regular","verified":true},{"page":56,"name":"The Whaling Museum","addr":"301 Main Street, Cold Spring Harbor","town":"Cold Spring Harbor","lat":40.8718,"lng":-73.454,"miles":10,"url":"www.cshwhalingmuseum.org","phone":"631.367.3418","days":["tue","wed","thu","fri","sat","sun"],"hours":"11:00am\u20134:00pm","kind":"regular","special":"","discrepancy":"","season_start":"05-01","season_end":"09-15","dates":[],"note":"A hands-on maritime museum with real whaleboats and harpoons that's reliably a hit with younger kids.","status":"weekend","verified":true},{"page":7,"name":"The Nathaniel Conklin House","addr":"280 Park Ave, Babylon","town":"Babylon","lat":40.6957,"lng":-73.3257,"miles":14,"url":"www.babylonvillagehistoricalsociety.org","phone":"631.669.1756","days":["wed","sat"],"hours":"1:00\u20133:00pm","kind":"regular","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"An 1803 homestead of one of Babylon's founding families, preserved as a house museum by the village historical society.","status":"weekend","verified":true},{"page":8,"name":"Village Of Babylon","addr":"117 W Main St, Babylon","town":"Babylon","lat":40.6957,"lng":-73.3257,"miles":14,"url":"www.babylonvillagehistoricalsociety.org","phone":"631.669.1756","days":["wed","sat"],"hours":"1:00\u20133:00pm","kind":"regular","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The village's history museum lives inside the old Babylon Library, a handsome building now on the National Register of Historic Places.","status":"weekend","verified":true},{"page":87,"name":"Village Of Head Of The Harbor","addr":"500 North Country Road, St. James","town":"St. James","lat":40.8782,"lng":-73.1574,"miles":14,"url":"www.headoftheharbor.gov","phone":"631.584.5550","days":["mon","tue","wed","thu","fri"],"hours":"9:00am\u20134:00pm","kind":"regular","special":"Village Hall business hours; call to confirm stamp availability","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The village hall of Head of the Harbor, a community that preserves the colonial-era character of the Stony Brook and Nissequogue waterfront.","status":"regular","verified":true},{"page":89,"name":"Caleb Smith State Park Museum","addr":"581 West Jericho Turnpike, Smithtown","town":"Smithtown","lat":40.8559,"lng":-73.2007,"miles":14,"url":"www.smithtownhistorical.org/strevolution","phone":"631.265.1054","days":["tue","wed","thu","fri","sat","sun"],"hours":"9:00am\u20135:00pm","kind":"regular","special":"Closed Mondays except holidays; vehicle fee in season","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A 1751 Smith-family home, now a nature museum at the heart of a 543-acre state preserve where the Smithtown founders farmed and lived through the Revolutionary era.","status":"regular","verified":true},{"page":90,"name":"The Epenetus Smith Tavern","addr":"211 East Main St, Smithtown","town":"Smithtown","lat":40.8559,"lng":-73.2007,"miles":14,"url":"www.smithtownhistorical.org/strevolution","phone":"631.265.6768","days":[],"hours":"","kind":"event","special":"Buildings open for special events/tours; grounds open most days","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A 1680s tavern that hosted town meetings and travelers along the old country road, preserved by the Smithtown Historical Society.","status":"event","verified":true},{"page":92,"name":"Widow Blydenburgh Tavern","addr":"1 North Country Road, Smithtown","town":"Smithtown","lat":40.8559,"lng":-73.2007,"miles":14,"url":"www.smithtownhistorical.org/strevolution","phone":"631.807.3731","days":[],"hours":"","kind":"event","special":"Brecknock Hall, Peconic Landing; open for tours/events \u2014 check schedule","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"An 1857 Greenport manor built by the grandson of a Revolutionary-era settler, set on grounds overlooking the Sound and open for seasonal heritage programs.","status":"event","verified":true},{"page":105,"name":"Raynham Hall Museum","addr":"30 West Main Street, Oyster Bay","town":"Oyster Bay","lat":40.8718,"lng":-73.5318,"miles":14,"url":"www.raynhamhallmuseum.org","phone":"516.922.6808","days":["tue","wed","thu","fri","sat","sun"],"hours":"1:00\u20135:00pm","kind":"regular","special":"Admission $15 / $10 student / free under 6","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Townsend family home and a genuine Culper Spy Ring site \u2014 Robert Townsend was the ring's key New York agent, and a British officer courting his sister unwittingly aided the spies.","status":"weekend","verified":true},{"page":111,"name":"Oyster Bay Historical Society","addr":"20 Summit Street, Oyster Bay","town":"Oyster Bay","lat":40.8718,"lng":-73.5318,"miles":14,"url":"www.oysterbayhistorical.org","phone":"","days":["tue","wed","thu","fri","sat"],"hours":"Tue\u2013Fri 10:00am\u20132:00pm, Sat 11:00am\u20133:00pm","kind":"regular","special":"House tours by appointment during gift-shop renovation","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Earle-Wightman House, a c.1720 dwelling with rooms interpreted to 1740 and 1830 and an authentic 18th-century garden, tells the story of Revolutionary-era Oyster Bay.","status":"regular","verified":true},{"page":9,"name":"Inc. Village Of Lindenhurst","addr":"430 South Wellwood Avenue, Lindenhurst","town":"Lindenhurst","lat":40.6868,"lng":-73.3737,"miles":15,"url":"www.facebook.com/villageoflindenhurst","phone":"631.957.7500","days":[],"hours":"","kind":"call","special":"Check Village of Lindenhurst Facebook for stamp dates","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Lindenhurst's village hall coordinates the community's 250th programming; watch their Facebook page for the stamp-event schedule.","status":"call","verified":true},{"page":10,"name":"Old Village Hall Museum","addr":"174 South Broadway, Lindenhurst","town":"Lindenhurst","lat":40.6868,"lng":-73.3737,"miles":15,"url":"www.lindenhursthistoricalsociety.org","phone":"631.506.8431","days":["wed","sat"],"hours":"2:00\u20134:00pm","kind":"regular","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Housed in Lindenhurst's original 1901 village hall, with an exhibit on Jesse Ketcham, a local soldier who fought at the Battle of Brooklyn and later escorted Washington across Long Island.","status":"weekend","verified":true},{"page":1,"name":"County Of Suffolk","addr":"100 Veterans Memorial Highway Hauppauge","town":"Hauppauge","lat":40.8259,"lng":-73.2026,"miles":16,"url":"www.suffolk250.org","phone":"631.853.6311","days":[],"hours":"","kind":"event","special":"Rolling 2026 calendar \u2014 see suffolk250.org event map","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The county's official 250th committee runs commemorative stamp events at fairs, parades, and civic functions all year \u2014 check their event map for the next one near you.","status":"event","verified":true},{"page":6,"name":"The Lauder Museum","addr":"170 Broadway, Amityville","town":"Amityville","lat":40.679,"lng":-73.4174,"miles":16,"url":"www.theamityvillehistoricalsociety.com","phone":"631.598.1486","days":[],"hours":"","kind":"call","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Amityville's local history museum, set in a former bank building and run entirely by volunteers who can open it by request for passport visitors.","status":"call","verified":true},{"page":88,"name":"Nissequogue Village Hall","addr":"631 Moriches Road, Nissequogue","town":"Nissequogue","lat":40.902,"lng":-73.192,"miles":16,"url":"www.nissequogueny.gov","phone":"631.862.7400","days":["mon","tue","wed","thu","fri"],"hours":"9:00am\u20134:00pm","kind":"regular","special":"Village Hall business hours; call to confirm stamp availability","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The village hall of Nissequogue, named for the Native people of the Nissequogue River and home to some of Smithtown's oldest colonial landholdings.","status":"regular","verified":true},{"page":91,"name":"Leo P. Ostebo","addr":"101 Church Street, Kings Park","town":"Kings Park","lat":40.8862,"lng":-73.2462,"miles":16,"url":"www.kpheritagemuseum.net","phone":"631.269.3305","days":["sat"],"hours":"10:00am\u20131:00pm","kind":"regular","special":"Private group tours (up to 10); housed in the 1928 Osgood school","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A community heritage museum tracing Kings Park from the Revolutionary War through the Spanish-American War and the Grumman space era, with a 2026 Revolutionary exhibit.","status":"regular","verified":true},{"page":110,"name":"Nassau County Historical Society","addr":"1 Merry Lane, Jericho","town":"Jericho","lat":40.792,"lng":-73.539,"miles":16,"url":"www.nassaucountyhistoricalsociety.org","phone":"516.443.0405","days":[],"hours":"","kind":"event","special":"Membership society (est. 1915); programs & lectures \u2014 check site","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Founded in 1915, the Nassau County Historical Society documents the history of the towns and villages that border Suffolk on western Long Island.","status":"event","verified":true},{"page":63,"name":"Historic Heines Homestead","addr":"68 Wheeler Road, Central Islip","town":"Central Islip","lat":40.7901,"lng":-73.2046,"miles":18,"url":"www.centralislipciviccouncil.org","phone":"631.348.0669","days":[],"hours":"","kind":"call","special":"Central Islip Civic Council site; call for access","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"An early homestead preserved by the Central Islip community, recalling the farming families who worked this stretch of central Long Island through the colonial and Revolutionary periods.","status":"call","verified":true},{"page":64,"name":"Sagtikos Manor","addr":"677 Montauk Highway, West Bay Shore","town":"West Bay Shore","lat":40.7176,"lng":-73.274,"miles":18,"url":"www.sagtikosmanor.org","phone":"631.854.0939","days":[],"hours":"","kind":"event","special":"Tours June\u2013Sept; check site for days","discrepancy":"","season_start":"06-01","season_end":"09-30","dates":[],"note":"A grand manor that served as a British headquarters during the Revolution \u2014 and where President Washington stayed overnight on his 1790 Long Island tour.","status":"event","verified":true},{"page":109,"name":"North Shore Historical Museum","addr":"140 Glen Street, Glen Cove","town":"Glen Cove","lat":40.8623,"lng":-73.6337,"miles":20,"url":"www.nshmgc.org","phone":"516.801.1191","days":[],"hours":"","kind":"call","special":"Call or check site for current exhibition hours","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Set in Glen Cove's restored 1907 Justices Court Building, this museum interprets the history of Long Island's North Shore, including its Gold Coast era.","status":"call","verified":true},{"page":16,"name":"Country House Restaurant","addr":"1175 N Country Rd, Stony Brook","town":"Stony Brook","lat":40.9257,"lng":-73.1409,"miles":22,"url":"www.wmho.org","phone":"631.751.2244","days":[],"hours":"","kind":"event","special":"STAMP IS COLLECTED AT Stony Brook Village Center (111 Main St), Mon\u2013Fri 9am\u20135pm \u2014 not at this house. The house itself is by appointment / Culper Spy Day only.","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A 1710 farmhouse turned restaurant that served as a stagecoach stop and, by local lore, a meeting spot for Revolutionary figures passing through.","status":"event","verified":true},{"page":21,"name":"The Long Island Museum","addr":"1200 Route 25A, Stony Brook","town":"Stony Brook","lat":40.9257,"lng":-73.1409,"miles":22,"url":"www.longislandmuseum.org","phone":"631.751.0066","days":["thu","fri","sat","sun"],"hours":"Thu 11:30am\u20137:00pm, Fri\u2013Sun 12:00\u20135:00pm","kind":"regular","special":"Smithsonian Affiliate; free admission Thursdays for Three Village residents","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"250th Revolution exhibit, a video-game exhibit, and the carriage collection. Very kid-friendly.","status":"regular","verified":true},{"page":30,"name":"The Stony Brook Village Center","addr":"111 Main Street, Stony Brook","town":"Stony Brook","lat":40.9257,"lng":-73.1409,"miles":22,"url":"www.wmho.org","phone":"631.751.2244","days":["mon","tue","wed","thu","fri","sat","sun"],"hours":"Village open daily","kind":"daily","special":"THE stamp pickup for all WMHO sites; comes with the audio walking tour","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The heart of historic Stony Brook and the single pickup point for all the Ward Melville Heritage sites \u2014 collect your stamp here while doing the free audio walking tour.","status":"weekend","verified":true},{"page":35,"name":"The Three Village Inn","addr":"150 Main Street, Stony Brook","town":"Stony Brook","lat":40.9257,"lng":-73.1409,"miles":22,"url":"www.wmho.org","phone":"631.751.0555","days":["mon","tue","wed","thu","fri","sat","sun"],"hours":"Inn/restaurant open daily","kind":"daily","special":"Stamp at Village Center, 111 Main St","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A historic inn and restaurant anchoring Stony Brook Village; your stamp is collected just up the street at the Village Center.","status":"weekend","verified":true},{"page":37,"name":"The Washington Spy Trail","addr":"111 Main Street, Stony Brook (start)","town":"Stony Brook","lat":40.9257,"lng":-73.1409,"miles":22,"url":"www.washingtonspytrail.com","phone":"631.751.2244","days":["mon","tue","wed","thu","fri","sat","sun"],"hours":"Self-guided anytime","kind":"daily","special":"Stamp at WMHO Village Center, 111 Main St","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A marked driving route tracing the path Washington's couriers and the 1790 presidential tour took across the North Shore.","status":"weekend","verified":true},{"page":66,"name":"St. John\u2019S Episcopal Church","addr":"1 Berard Blvd, Oakdale","town":"Oakdale","lat":40.7387,"lng":-73.1351,"miles":22,"url":"islpny.gov","phone":"","days":["sun"],"hours":"11:30am service","kind":"event","special":"First three Sundays of each month; visitors welcome around services","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"An ornate 1765-rooted Episcopal parish on the former Nicoll/Idle Hour estate grounds in Oakdale, tied to one of Long Island's prominent colonial landholding families.","status":"event","verified":true},{"page":106,"name":"Roslyn Landmark Society","addr":"THE 1680 VAN NOSTRAND-STARKINS","town":"Roslyn","lat":40.7998,"lng":-73.651,"miles":22,"url":"www.roslynlandmarks.org","phone":"","days":[],"hours":"","kind":"event","special":"Guided house tours and a monthly lecture series; check event calendar","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The preservation society of Roslyn, whose 340-year-old village center is a nationally recognized showcase of early American architecture saved from 1960s demolition.","status":"event","verified":true},{"page":15,"name":"The Brewster House","addr":"25 Brewster Lane, Setauket","town":"Setauket","lat":40.9312,"lng":-73.1057,"miles":24,"url":"www.wmho.org","phone":"631.751.2244","days":[],"hours":"","kind":"event","special":"STAMP IS COLLECTED AT Stony Brook Village Center (111 Main St), Mon\u2013Fri 9am\u20135pm \u2014 not at this house. The house itself is by appointment / Culper Spy Day only.","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Built in 1665, it's the oldest house in the Town of Brookhaven; spy Caleb Brewster was a frequent visitor to the cove just beyond its door.","status":"event","verified":true},{"page":17,"name":"The Davis Town Meeting House","addr":"263 Middle Country Road, Coram","town":"Coram","lat":40.8718,"lng":-72.9982,"miles":24,"url":"www.davishousesociety.org","phone":"631.846.1224","days":[],"hours":"","kind":"event","special":"Monthly tours \u2014 call 631.846.1224 for the next date","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A c.1740 tavern and inn that was the birthplace of several Coram patriots, now lovingly maintained by a volunteer society offering monthly tours.","status":"call","verified":true},{"page":24,"name":"Meadow Croft Estate","addr":"299 Middle Road, Sayville","town":"Sayville","lat":40.7357,"lng":-73.0832,"miles":24,"url":"www.bayportbluepointheritage.org","phone":"","days":["sat","sun"],"hours":"2:00\u20134:00pm","kind":"regular","special":"","discrepancy":"","season_start":"06-01","season_end":"10-31","dates":[],"note":"The summer home of John Ellis Roosevelt, first cousin of President Theodore Roosevelt \u2014 a Colonial Revival estate restored to its 1910 appearance with barns and a carriage house.","status":"regular","verified":true},{"page":27,"name":"Patriots Rock Historic Site","addr":"Adjacent 97 Main Street, Setauket","town":"Setauket","lat":40.9312,"lng":-73.1057,"miles":24,"url":"www.threevillagecommunitytrust.org","phone":"631.689.0225","days":[],"hours":"","kind":"event","special":"Three Village Community Trust events; open Culper Spy Day (Oct 3)","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The boulder marking the 1777 Battle of Setauket, where Patriot raiders attacked British troops dug in around the village church.","status":"event","verified":true},{"page":28,"name":"Sherwood-Jayne Farm","addr":"55 Old Post Road, East Setauket","town":"East Setauket","lat":40.9376,"lng":-73.0987,"miles":24,"url":"www.preservationlongisland.org","phone":"631.692.4664","days":[],"hours":"","kind":"event","special":"Grounds open; house by event/appointment (Preservation LI)","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A c.1730 farm preserved by Preservation Long Island, with original wallpaper and outbuildings that open for special Revolutionary-era programs.","status":"event","verified":true},{"page":29,"name":"The Smith/De Zafra House","addr":"55 Main Street, Setauket","town":"Setauket","lat":40.9312,"lng":-73.1057,"miles":24,"url":"www.threevillagecommunitytrust.org","phone":"631.689.0225","days":[],"hours":"","kind":"event","special":"Docent-led tour events (Three Village Community Trust)","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A Setauket landmark that once served as Brookhaven's first town hall, opened for docent-led tours by the community trust.","status":"event","verified":true},{"page":33,"name":"The Thompson House","addr":"91 N Country Road, East Setauket","town":"East Setauket","lat":40.9376,"lng":-73.0987,"miles":24,"url":"www.wmho.org","phone":"631.751.2244","days":[],"hours":"","kind":"event","special":"STAMP IS COLLECTED AT Stony Brook Village Center (111 Main St), Mon\u2013Fri 9am\u20135pm \u2014 not at this house. The house itself is by appointment / Culper Spy Day only.","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Home of Dr. Samuel Thompson, who quietly treated members of the Culper Spy Ring; one of the oldest saltbox houses on Long Island.","status":"event","verified":true},{"page":34,"name":"Three Village","addr":"93 N Country Road, East Setauket","town":"East Setauket","lat":40.9376,"lng":-73.0987,"miles":24,"url":"www.tvhs.org","phone":"631.751.3730","days":[],"hours":"","kind":"event","special":"Stamp via Tri-Spy tours or museum open days \u2014 see tvhs.org","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The 'SPIES!' exhibit here tells the full Culper Spy Ring story that inspired the TV series Turn \u2014 Setauket was the ring's home base.","status":"event","verified":true},{"page":36,"name":"Tri-Spy Tours","addr":"93 N Country Road, Setauket","town":"Setauket","lat":40.9312,"lng":-73.1057,"miles":24,"url":"www.culper.com","phone":"631.751.3730","days":[],"hours":"","kind":"event","special":"Scheduled walk/bike/kayak tours \u2014 book at culper.com","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Guided walking, biking, and kayak tours that retrace the Culper Spy Ring's actual routes around Setauket harbor, stamping your passport along the way.","status":"event","verified":true},{"page":65,"name":"Long Island Maritime Museum","addr":"88 West Avenue, Sayville","town":"Sayville","lat":40.7357,"lng":-73.0832,"miles":24,"url":"www.limaritime.org","phone":"631.854.4974","days":["mon","tue","wed","thu","fri","sat","sun"],"hours":"Mon\u2013Sat 10:00am\u20134:00pm, Sun 12:00\u20134:00pm","kind":"regular","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A 14-acre waterfront museum of Long Island's seafaring and oystering heritage, with National Historic Landmark vessels and a working boat shop on the Great South Bay.","status":"regular","verified":true},{"page":13,"name":"Bayles Boat Shop","addr":"101A East Broadway, Port Jefferson","town":"Port Jefferson","lat":40.947,"lng":-73.0712,"miles":26,"url":"www.baylesboatshop.org","phone":"","days":["mon","tue","wed","thu","sat"],"hours":"9:00am\u201312:00pm (Tue also 7:00\u20139:00pm)","kind":"regular","special":"Website confirms the stamp is ready","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A working wooden-boat shop where volunteers built a full replica of Caleb Brewster's armed whaleboat \u2014 the kind the Culper spies used to slip messages across the Sound to Washington.","status":"weekend","verified":true},{"page":18,"name":"Drowned Meadow Cottage Museum","addr":"141 West Broadway, Port Jefferson","town":"Port Jefferson","lat":40.947,"lng":-73.0712,"miles":26,"url":"www.instagram.com/dmc_museum","phone":"631.473.4724","days":[],"hours":"","kind":"event","special":"Guided tours seasonally; free with Culper Spy Day. See @dmc_museum","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A c.1755 cottage that was home to the Roe family, with an exhibit on the privateers who raided British shipping off Long Island's coast.","status":"event","verified":true},{"page":20,"name":"Long Island Explorium","addr":"101 East Broadway, Port Jefferson","town":"Port Jefferson","lat":40.947,"lng":-73.0712,"miles":26,"url":"www.longislandexplorium.org","phone":"631.331.3277","days":["wed","thu","fri","sat","sun"],"hours":"1:00\u20135:00pm","kind":"regular","special":"Summer hours (Wed\u2013Sun); $5 admission. School-year hours differ \u2014 confirm ahead","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A hands-on children's science museum (STEAM) right on Port Jefferson harbor \u2014 the kind of place that pairs well with a stamp stop for younger kids.","status":"regular","verified":true},{"page":23,"name":"Mather House Museum","addr":"115 Prospect Street, Port Jefferson","town":"Port Jefferson","lat":40.947,"lng":-73.0712,"miles":26,"url":"www.portjeffhistorical.org","phone":"631.473.2665","days":["wed","thu","fri","sat","sun"],"hours":"12:00\u20134:00pm","kind":"regular","special":"Donation requested","discrepancy":"","season_start":"05-24","season_end":"10-15","dates":[],"note":"An 1840s captain's house packed with Port Jefferson shipbuilding history and the remarkable Spinney Clock Collection of roughly 250 timepieces.","status":"weekend","verified":true},{"page":19,"name":"Greater Patchogue Historical Museum","addr":"160 West Main Street, Patchogue","town":"Patchogue","lat":40.7657,"lng":-73.0151,"miles":28,"url":"www.greaterpatchoguehistoricalsociety.com","phone":"631.654.5400","days":[],"hours":"","kind":"call","special":"Greater Patchogue Historical Society; call or check site for hours","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Greater Patchogue Historical Society preserves the history of Patchogue and its neighboring South Shore communities along the Great South Bay.","status":"call","verified":true},{"page":25,"name":"Miller Place/Mt. Sinai","addr":"75 North Country Road, Miller Place","town":"Miller Place","lat":40.9568,"lng":-72.9982,"miles":28,"url":"www.mpmshs.org","phone":"","days":["sat"],"hours":"Saturday afternoons","kind":"regular","special":"Tours rest of year by appointment; 1720 William Miller House marks its 300th in 2026","discrepancy":"","season_start":"06-01","season_end":"09-30","dates":[],"note":"The 1720 William Miller House \u2014 barely altered in 300 years \u2014 anchors a society preserving Miller Place and Mount Sinai, communities linked since the 1600s.","status":"regular","verified":true},{"page":104,"name":"Freeport Memorial Library","addr":"144 W. Merrick Road, Freeport, N.Y.","town":"Freeport","lat":40.6576,"lng":-73.5832,"miles":28,"url":"www.freeportnyhistory.org/events","phone":"516.379.3274","days":["mon","tue","wed","thu","fri","sat","sun"],"hours":"Open daily; check current hours","kind":"regular","special":"Freeport Historical Society events via the library; confirm stamp hours","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Freeport's library and historical society chronicle this South Shore village's history from its colonial roots as part of the Hempstead settlement.","status":"regular","verified":true},{"page":4,"name":"Suffolk County Police Department","addr":"30 Yaphank Avenue, Yaphank","town":"Yaphank","lat":40.8312,"lng":-72.9201,"miles":30,"url":"www.instagram.com/scpdhq","phone":"631.852.6000","days":[],"hours":"evening","kind":"event","special":"Stamps at National Night Out events; venues via @scpdhq","discrepancy":"","season_start":null,"season_end":null,"dates":["2026-08-04"],"note":"The police department hands out stamps at its 250th-themed National Night Out, a free family event with first-responder demos held at locations across Suffolk.","status":"event","verified":true},{"page":12,"name":"Avery Homestead County Park","addr":"29 South Country Road, East Patchogue","town":"East Patchogue","lat":40.7682,"lng":-72.976,"miles":30,"url":"www.greaterpatchoguehistoricalsociety.com","phone":"631.654.5400","days":[],"hours":"","kind":"call","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A county park around a homestead farmed by the same family for 250+ years; Humphrey Avery III served here in the 3rd Regiment of the New York Line during the Revolution.","status":"call","verified":true},{"page":26,"name":"1721 Noah Hallock Homestead","addr":"172 Hallock Landing Road, Rocky Point","town":"Rocky Point","lat":40.9476,"lng":-72.9265,"miles":30,"url":"www.rockypointhistoricalsociety.org","phone":"631.744.1776","days":["sat"],"hours":"1:00\u20134:00pm","kind":"regular","special":"$5 donation; group/school tours by appointment","discrepancy":"","season_start":"04-01","season_end":"12-31","dates":[],"note":"Rocky Point's oldest house (1721) and the birthplace of six Hallock men who fought as patriots in the Revolution \u2014 two are buried in the family cemetery on the hill behind it.","status":"regular","verified":true},{"page":31,"name":"Swezey-Avey House","addr":"19 Mill Road, Yaphank","town":"Yaphank","lat":40.8312,"lng":-72.9201,"miles":30,"url":"www.yaphankhistorical.org","phone":"631.775.0735","days":[],"hours":"","kind":"event","special":"Yaphank Historical Society; archives/exhibits by appointment, monthly programs","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"An 1850s house cared for by the Yaphank Historical Society, in a hamlet whose mills and homesteads served the surrounding farms from the colonial era onward.","status":"event","verified":true},{"page":14,"name":"Bellport-Brookhaven","addr":"12 Bellport Street, Bellport","town":"Bellport","lat":40.7568,"lng":-72.9396,"miles":32,"url":"www.bbhsmuseum.com","phone":"","days":["fri","sat"],"hours":"1:00\u20134:00pm","kind":"regular","special":"Other times by email: director@bbhsmuseum.com","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The society's Barn Museum traces the area from its Native American roots through the Revolution, with its 2026 theme focused on life just before 1776.","status":"weekend","verified":true},{"page":32,"name":"Tesla Science Center At Wardenclyffe","addr":"5 Randall Road, Shoreham","town":"Shoreham","lat":40.9568,"lng":-72.899,"miles":32,"url":"www.teslasciencecenter.org/suffolk250","phone":"631.886.2632","days":["fri","sat","sun"],"hours":"9:30am\u20133:00pm","kind":"regular","special":"Guided tours by advance reservation only","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Nikola Tesla's last surviving laboratory, the Stanford White\u2013designed lab where he pursued wireless power; a National Register landmark being restored into a science center.","status":"regular","verified":true},{"page":107,"name":"Pagan Fletcher House","addr":"143 Hendrickson Ave, Valley Stream","town":"Valley Stream","lat":40.6643,"lng":-73.7085,"miles":32,"url":"www.vsvny.org","phone":"516.825.2490","days":[],"hours":"","kind":"call","special":"Pagan-Fletcher Restoration, Village of Valley Stream; call for hours","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Pagan-Fletcher house is Valley Stream's oldest surviving home, a restored 19th-century dwelling on land farmed since the colonial era.","status":"call","verified":true},{"page":38,"name":"Wading River Historical Society","addr":"300 North Country Road, Wading River","town":"Wading River","lat":40.949,"lng":-72.839,"miles":34,"url":"www.wadingriverhistoricalsociety.weebly.com","phone":"","days":[],"hours":"","kind":"call","special":"Wading River Historical Society & Museum; call/check site for open hours","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Wading River Historical Society preserves the heritage of this old North Shore farming and milling hamlet at the eastern edge of Brookhaven Town.","status":"call","verified":true},{"page":108,"name":"Rock Hall Museum","addr":"199 Broadway, Lawrence","town":"Lawrence","lat":40.6168,"lng":-73.729,"miles":35,"url":"www.friendsofrockhall.org","phone":"516.239.1157","days":["wed","thu","fri","sat","sun"],"hours":"Wed\u2013Sat 10:00am\u20134:00pm, Sun 12:00\u20134:00pm","kind":"regular","special":"House tours by appointment (groups up to 8); grounds open daily till 4","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A 1767 Georgian mansion built for plantation owner Josiah Martin \u2014 one of the finest pre-Revolutionary War homes on Long Island, now run by the Town of Hempstead.","status":"regular","verified":true},{"page":22,"name":"Manor Of St. George","addr":"Neighborhood Road and William Floyd Parkway, Shirley","town":"Shirley","lat":40.799,"lng":-72.8718,"miles":38,"url":"www.suffolk250.org","phone":"","days":["wed","thu","fri","sat","sun"],"hours":"Seasonal \u2014 call to confirm","kind":"event","special":"Suffolk County historic site; the 1693 manor where the 1780 Battle of Fort St. George was fought","discrepancy":"","season_start":"05-01","season_end":"10-31","dates":[],"note":"The manor at the center of Long Island's Revolution: in 1780 Benjamin Tallmadge's raiders stormed the British-held Fort St. George here, then burned the King's hay stores at Coram.","status":"event","verified":true},{"page":39,"name":"Wertheim National","addr":"340 Smith Road, Shirley","town":"Shirley","lat":40.799,"lng":-72.8718,"miles":38,"url":"www.fws.gov/refuge/wertheim","phone":"631.286.0485","days":["mon","tue","wed","thu","fri","sat"],"hours":"9:00am\u20134:00pm","kind":"regular","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The visitor center for Long Island's national wildlife refuges, on the Carmans River \u2014 trails, exhibits, and a launch point for the area's Revolutionary-era river history.","status":"regular","verified":true},{"page":40,"name":"William Floyd Estate","addr":"245 Park Drive, Mastic Beach","town":"Mastic Beach","lat":40.7657,"lng":-72.8518,"miles":40,"url":"www.nps.gov/fiis/learn/historyculture/floyd-estategrounds.htm","phone":"631-399-2030","days":["wed","thu","fri","sat","sun"],"hours":"Grounds daily 8am\u20135pm; Old Mastic House tours Wed\u2013Sun","kind":"regular","special":"Grounds open daily year-round; guided house tours Wed\u2013Sun in season (NPS)","discrepancy":"Tour days/hours vary by source (NPS lists Wed\u2013Sun in season; an older county listing said Fri\u2013Sun 10\u20134). Check nps.gov/fiis or call before visiting.","season_start":"05-22","season_end":"09-30","dates":[],"note":"The ancestral home of William Floyd, the only Suffolk County signer of the Declaration of Independence; a 25-room house on 613 acres run by the National Park Service.","status":"regular","verified":true},{"page":2,"name":"The Suffolk County Sheriff\u2019S Office","addr":"100 Center Drive, Riverhead","town":"Riverhead","lat":40.917,"lng":-72.662,"miles":42,"url":"www.suffolksheriff.com","phone":"631.852.2200","days":["mon","tue","wed","thu","fri"],"hours":"8:30am\u20134:30pm","kind":"regular","special":"Closed holidays","discrepancy":"","season_start":null,"season_end":"06-09","dates":[],"note":"Sheriff's office exhibit of Revolutionary-era artifacts and local history, displayed in the lobby of Riverhead Town Hall, with more pop-up exhibits rolling out across the county.","status":"weekday","verified":true},{"page":3,"name":"Suffolk County Clerk\u2019S Archives","addr":"310 Center Drive, Riverhead","town":"Riverhead","lat":40.917,"lng":-72.662,"miles":42,"url":"www.suffolkcountyny.gov/clerk","phone":"631.852.2000","days":[],"hours":"","kind":"call","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Home to a 1785 deed signed by Culper Spy Ring members Benjamin Tallmadge and Caleb Brewster \u2014 a rare original document from Washington's Long Island spy network.","status":"call","verified":true},{"page":68,"name":"Suffolk County Historical Society","addr":"300 W Main St, Riverhead","town":"Riverhead","lat":40.917,"lng":-72.662,"miles":42,"url":"www.suffolkcountyhistoricalsociety.org","phone":"631.727.2881","days":["wed","thu","fri","sat"],"hours":"10:00am\u20134:30pm","kind":"regular","special":"2026 exhibit \"For the Blessings of Liberty: Suffolk County & the American Revolution\"; $5 adult","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Founded in 1886, Suffolk County's flagship history museum holds a major 250th exhibition on the county's Revolutionary role \u2014 from the Declaration's signers to the Culper spies.","status":"regular","verified":true},{"page":69,"name":"The Riverhead Free Library","addr":"330 Court Street, Riverhead","town":"Riverhead","lat":40.917,"lng":-72.662,"miles":42,"url":"www.riverheadlibrary.org","phone":"631.727.3228","days":["mon","tue","wed","thu","fri","sat"],"hours":"Open daily; check current hours","kind":"regular","special":"Public library local-history room; confirm stamp desk hours","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Riverhead's public library holds a local-history collection documenting the colonial and Revolutionary roots of the county seat at the head of the Peconic River.","status":"regular","verified":true},{"page":76,"name":"The Greater Westhampton","addr":"101 Mill Road, Westhampton","town":"Westhampton","lat":40.8237,"lng":-72.662,"miles":48,"url":"www.whbhistorical.org","phone":"631.288.1139","days":[],"hours":"","kind":"call","special":"Tuthill House Museum, 101 Mill Rd; call for current open hours","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Greater Westhampton Historical Museum preserves the heritage of the Westhamptons, Quogue, and Remsenburg \u2014 communities rooted in 17th-century colonial settlement.","status":"call","verified":true},{"page":81,"name":"Pond House","addr":"114 Jessup Avenue, Quogue","town":"Quogue","lat":40.8087,"lng":-72.609,"miles":50,"url":"www.quoguehistory.org","phone":"631.996.2404","days":[],"hours":"","kind":"call","special":"Quogue Historical Society / 1822 schoolhouse; call to confirm hours","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Pond House and the 1822 one-room Quogue schoolhouse preserve the history of this small South Fork village settled in the late 1600s.","status":"call","verified":true},{"page":100,"name":"1799 Jesse Tuthill House","addr":"18200 Main Road, Mattituck","town":"Mattituck","lat":40.9912,"lng":-72.534,"miles":54,"url":"www.mlhistoricalsociety.org","phone":"631.298.5248","days":["fri","sat","sun"],"hours":"Sun 2:00\u20135:00pm; Fri\u2013Sat by program","kind":"event","special":"Mattituck-Laurel Historical Society; July 4 250th reenactment + Sunday Salons","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The 1799 Jesse Tuthill House anchors the Mattituck-Laurel Historical Society's grounds, where a 2026 Revolutionary reenactment marks the nation's 250th.","status":"event","verified":true},{"page":74,"name":"Conscience Point Historic Site","addr":"North Sea Road, Southampton","town":"Southampton","lat":40.8843,"lng":-72.3895,"miles":58,"url":"www.southamptonhistory.org","phone":"631.283.2494","days":["mon","tue","wed","thu","fri","sat","sun"],"hours":"Sunrise\u2013sunset","kind":"daily","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The 1640 landing spot of Southampton's first European settlers, now a quiet nature preserve on the bay rather than a building.","status":"weekend","verified":true},{"page":78,"name":"North End Burial Ground","addr":"165 Main Street, Southampton Village","town":"Southampton","lat":40.8843,"lng":-72.3895,"miles":58,"url":"www.southamptontownny.gov/200/Historic-Division","phone":"631.702.2406","days":["mon","tue","wed","thu","fri","sat","sun"],"hours":"Open daily, daylight","kind":"daily","special":"Historic burial ground \u2014 outdoor site, Southampton Town Historic Division","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A colonial-era burial ground holding the graves of Southampton's early settlers and Revolutionary-era residents, open as a quiet historic landscape.","status":"regular","verified":true},{"page":80,"name":"Pelletreau Silver Shop","addr":"80 Main Street, Southampton","town":"Southampton","lat":40.8843,"lng":-72.3895,"miles":58,"url":"www.southamptonhistory.org","phone":"631.283.2494","days":["sat","sun"],"hours":"Weekends, summer months","kind":"regular","special":"Operator lists summer weekends; some sources list Tue\u2013Sat 11\u20134. Working silversmith shop","discrepancy":"Hours differ by source (the museum's own site says 'weekends in summer'; a landmark listing says Tue\u2013Sat 11am\u20134pm; an aggregator says Wed\u2013Mon 11\u20136). Call 631-283-2494 to confirm.","season_start":"06-01","season_end":"09-30","dates":[],"note":"A working silversmith shop dating to 1686 \u2014 among the oldest continuously operating trade shops in the Americas; Capt. Elias Pelletreau supplied silver to clients including William Floyd.","status":"regular","verified":true},{"page":82,"name":"Rogers Mansion Museum Complex","addr":"17 Meeting House Lane, Southampton","town":"Southampton","lat":40.8843,"lng":-72.3895,"miles":58,"url":"www.southamptonhistory.org","phone":"631.283.2494","days":[],"hours":"","kind":"call","special":"Interior closed for restoration; grounds open dawn\u2013dusk","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Southampton History Museum's main campus around the Rogers Mansion; the interior is under restoration but the historic grounds remain open.","status":"call","verified":true},{"page":83,"name":"Southampton African","addr":"245 North Sea Road, Southampton","town":"Southampton","lat":40.8843,"lng":-72.3895,"miles":58,"url":"www.saamuseum.org","phone":"631.353.3299","days":[],"hours":"","kind":"event","special":"Group & co-founder tours by appointment; office Mon\u2013Sat 9:00am\u20135:00pm","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Set in a former barbershop that anchored Southampton's historic Black community, this museum tells the story of African Americans on the East End from the colonial era onward.","status":"event","verified":true},{"page":84,"name":"Thomas Halsey House & Gardens","addr":"279 South Main Street, Southampton","town":"Southampton","lat":40.8843,"lng":-72.3895,"miles":58,"url":"www.southamptonhistory.org","phone":"631.283.2494","days":["sat"],"hours":"11:00am\u20134:00pm","kind":"regular","special":"Saturdays only, June 6\u2013August 29, 2026","discrepancy":"","season_start":"06-06","season_end":"08-29","dates":[],"note":"Thomas Halsey House \u2014 a 1660s homestead, one of the oldest in New York State, restored to its late-1600s appearance with a colonial garden.","status":"regular","verified":true},{"page":85,"name":"Water Mill Museum","addr":"41 Old Mill Road, Water Mill","town":"Water Mill","lat":40.9176,"lng":-72.3454,"miles":58,"url":"www.watermillmuseum.org","phone":"631.726.4625","days":[],"hours":"","kind":"call","special":"41 Old Mill Road; call to confirm seasonal hours","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"A working 1644 water-powered grist mill \u2014 one of the oldest operating mills in America \u2014 where colonists ground grain through the Revolutionary era and beyond.","status":"call","verified":true},{"page":95,"name":"The Old House","addr":"Cutchogue-New Suffolk Historical","town":"Cutchogue","lat":41.0126,"lng":-72.4854,"miles":58,"url":"www.cutchoguenewsuffolkhistory.org","phone":"631.379.7494","days":["sat","sun"],"hours":"Family History Day & seasonal events \u2014 check council","kind":"event","special":"Cutchogue-New Suffolk Historical Council; Village Green buildings","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Old House on Cutchogue's Village Green is a 1649 dwelling \u2014 among the oldest English-framed houses in the country \u2014 surrounded by a 1740 farmhouse, schoolhouse, and barns.","status":"event","verified":true},{"page":71,"name":"The Shelter Island History Museum","addr":"16 South Ferry Road, Shelter Island","town":"Shelter Island","lat":41.0698,"lng":-72.337,"miles":60,"url":"www.shelterislandhistorymuseum.org","phone":"631.749.0025","days":["mon","tue","wed","thu","fri","sat"],"hours":"Mon\u2013Fri 10:00am\u20132:00pm, Sat 9:00am\u20131:00pm","kind":"regular","special":"Havens House & history center, 16 S Ferry Rd","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Shelter Island Historical Society cares for the 1743 Havens House, home to a Quaker family whose island sheltered Friends fleeing religious persecution in the colonial era.","status":"regular","verified":true},{"page":77,"name":"The Nathaniel Rogers House","addr":"2539 Montauk Highway, Bridgehampton","town":"Bridgehampton","lat":40.9376,"lng":-72.3009,"miles":60,"url":"www.bridgehamptonmuseum.org/250","phone":"631.537.1088","days":["fri","sat","sun"],"hours":"Seasonal \u2014 check museum calendar","kind":"regular","special":"Bridgehampton Museum; Corwith House by appointment (631-537-1088)","discrepancy":"","season_start":"03-01","season_end":"12-15","dates":[],"note":"The Greek Revival Nathaniel Rogers House anchors the Bridgehampton Museum, interpreting the agricultural and maritime life of a community settled in 1656.","status":"regular","verified":true},{"page":59,"name":"Heritage House","addr":"139 Hampton Street, Sag Harbor","town":"Sag Harbor","lat":40.9982,"lng":-72.2926,"miles":62,"url":"www.eastvillehistorical.org","phone":"631.725.4711","days":["thu","fri","sat","sun"],"hours":"11:00am\u20134:00pm","kind":"regular","special":"2026 exhibit: \"The Revolution at Hand\"; Rev-War walking tours of the Old Burying Ground","discrepancy":"","season_start":"05-24","season_end":"10-11","dates":[],"note":"The Annie Cooper Boyd House (c.1760), a colonial home on Captain's Row telling Sag Harbor's story \u2014 including the 1777 Patriot raid known as the Battle of Sag Harbor.","status":"regular","verified":true},{"page":73,"name":"Sag Harbor Whaling And","addr":"200 Main Street, Sag Harbor","town":"Sag Harbor","lat":40.9982,"lng":-72.2926,"miles":62,"url":"www.sagharborwhalingmuseum.org","phone":"631.725.0770","days":["sat","sun"],"hours":"10:00am\u20134:00pm","kind":"regular","special":"Open ~6 months/year; check site for added weekdays in peak season","discrepancy":"","season_start":"05-01","season_end":"10-31","dates":[],"note":"A National Treasure in the 1845 Benjamin Huntting whaling-merchant mansion, holding New York's largest whaling collection \u2014 Sag Harbor was British-occupied for seven years during the Revolution.","status":"regular","verified":true},{"page":75,"name":"Custom House","addr":"192 Main Street, Sag Harbor","town":"Sag Harbor","lat":40.9982,"lng":-72.2926,"miles":62,"url":"www.preservationlongisland.org","phone":"631.692.4664","days":["fri","sat","sun"],"hours":"Seasonal tours through mid-Oct","kind":"event","special":"Preservation Long Island; check tour calendar","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The restored 1789 home and office of Henry Packer Dering, the first U.S. Customs Master of the Port of Sag Harbor \u2014 a window into the new nation's early maritime commerce.","status":"event","verified":true},{"page":79,"name":"Old Whalers\u2019 Church","addr":"44 Union Street, Sag Harbor","town":"Sag Harbor","lat":40.9982,"lng":-72.2926,"miles":62,"url":"www.oldwhalerschurch.org","phone":"631.725.0894","days":["sun"],"hours":"Sunday services; office hours weekdays","kind":"event","special":"Active congregation (First Presbyterian); visitors welcome around services","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The 1844 Old Whalers' Church, an extraordinary Egyptian-Revival landmark built at the height of Sag Harbor's whaling wealth; its lost steeple once guided ships home.","status":"event","verified":true},{"page":97,"name":"The Southold Historical Museum\u2019S","addr":"3575 Lighthouse Road, Southold","town":"Southold","lat":41.064,"lng":-72.4259,"miles":62,"url":"www.southoldhistorical.org","phone":"631.765.5500","days":["sat","sun"],"hours":"11:30am\u20134:00pm","kind":"regular","special":"Horton Point Lighthouse & Nautical Museum; $5/$10 family incl. both sites","discrepancy":"","season_start":"05-23","season_end":"09-14","dates":[],"note":"An 1857 lighthouse whose construction was authorized by President George Washington himself, now a nautical museum overlooking Long Island Sound.","status":"regular","verified":true},{"page":98,"name":"Southold Historical Museum\u2019S","addr":"54325 Main Road, Southold","town":"Southold","lat":41.064,"lng":-72.4259,"miles":62,"url":"www.southoldhistorical.org","phone":"631.765.5500","days":["sat","sun"],"hours":"1:00\u20134:00pm","kind":"regular","special":"Maple Lane Campus \u2014 a dozen buildings dating to the 1700s; group tours year-round","discrepancy":"","season_start":"05-23","season_end":"09-14","dates":[],"note":"The Southold Historical Museum's Maple Lane campus preserves over a dozen structures from the 1750s onward in one of New York's oldest English towns (settled 1640).","status":"regular","verified":true},{"page":102,"name":"Southold Indian Museum","addr":"1080 Main Bayview Road, Southold","town":"Southold","lat":41.064,"lng":-72.4259,"miles":62,"url":"www.southoldindianmuseum.com","phone":"631.765.5577","days":["sun"],"hours":"1:30\u20134:30pm","kind":"regular","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"Run by the Long Island Chapter of the NY State Archaeological Association, this museum holds one of the region's great collections of Corchaug and Long Island Native American artifacts spanning 10,000 years.","status":"regular","verified":true},{"page":94,"name":"Brecknock Hall","addr":"1 Brecknock Road, Greenport","town":"Greenport","lat":41.1037,"lng":-72.3618,"miles":68,"url":"www.friendsforbrecknockhall.org","phone":"","days":["mon","wed","thu","fri","sat","sun"],"hours":"11:00am\u20134:00pm","kind":"regular","special":"Closed Tuesdays; closed Jan 1\u2013Memorial Day. Pay-what-you-wish","discrepancy":"","season_start":"05-23","season_end":"12-31","dates":[],"note":"A maritime museum in Greenport's old railroad freight house, telling the story of an East End port whose ships and shipyards served the region from colonial times onward.","status":"regular","verified":true},{"page":96,"name":"East End Seaport Museum","addr":"100 3rd Street, Greenport","town":"Greenport","lat":41.1037,"lng":-72.3618,"miles":68,"url":"www.eastendseaport.org","phone":"","days":["mon","wed","thu","fri","sat","sun"],"hours":"11:00am\u20134:00pm","kind":"regular","special":"Closed Tuesdays; closed Jan 1\u2013Memorial Day. Pay-what-you-wish","discrepancy":"","season_start":"05-23","season_end":"12-31","dates":[],"note":"A maritime museum in Greenport's old railroad freight house, telling the story of an East End port whose ships and shipyards served the region from colonial times onward.","status":"regular","verified":true},{"page":99,"name":"Ireland House Museum","addr":"319 Main Street, Greenport","town":"Greenport","lat":41.1037,"lng":-72.3618,"miles":68,"url":"www.stirlinghistoricalsocietygreenport.com/general-6","phone":"631.477.5918","days":[],"hours":"","kind":"event","special":"Stirling Historical Society, Greenport; seasonal open hours \u2014 check site","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Ireland House preserves the maritime and village history of Greenport's Stirling neighborhood, a port whose ships and wharves trace back to the 18th century.","status":"event","verified":true},{"page":58,"name":"Guild Hall","addr":"158 Main Street, East Hampton","town":"East Hampton","lat":40.9634,"lng":-72.1848,"miles":70,"url":"www.guildhall.org","phone":"","days":["thu","fri","sat","sun"],"hours":"12:00\u20135:00pm","kind":"regular","special":"Gallery admission always free","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"One of America's first multidisciplinary cultural centers (1931), Guild Hall sits in the heart of historic East Hampton, a village whose English settlement dates to 1648.","status":"regular","verified":true},{"page":60,"name":"Mulford Farm","addr":"10 James Lane, East Hampton","town":"East Hampton","lat":40.9634,"lng":-72.1848,"miles":70,"url":"www.easthamptonhistory.org","phone":"","days":["fri","sat","sun"],"hours":"Check society calendar","kind":"event","special":"East Hampton Historical Society \u2014 hours vary by week; check calendar","discrepancy":"","season_start":"05-23","season_end":"10-12","dates":[],"note":"One of America's most intact English colonial farmsteads, a 1680 farmhouse interpreted to the year 1790 with costumed interpreters and an original English-plan barn.","status":"event","verified":true},{"page":101,"name":"Oysterponds Historical Society","addr":"1555 Village Lane, Orient","town":"Orient","lat":41.1437,"lng":-72.3046,"miles":72,"url":"www.OysterpondsHistoricalSociety.org","phone":"631.323.2480","days":["fri","sat","sun"],"hours":"Fri 2:00\u20135:00pm, Sat 11:00am\u20135:00pm, Sun 2:00\u20135:00pm","kind":"regular","special":"2026: Webb House Tavern Night marks the 250th; $10 adults","discrepancy":"","season_start":"05-23","season_end":"10-04","dates":[],"note":"The Oysterponds Historical Society in Orient cares for a cluster of 18th- and 19th-century buildings, including the Webb House where Revolutionary-era travelers once lodged.","status":"regular","verified":true},{"page":61,"name":"Third House Nature Center","addr":"1929 Montauk Highway, Montauk","town":"Montauk","lat":41.0359,"lng":-71.9545,"miles":85,"url":"www.thirdhousenaturecenter.org","phone":"631.488.5900","days":["sat","sun"],"hours":"Seasonal weekends \u2014 check center","kind":"event","special":"Third House Nature Center, Montauk County Park; seasonal programs","discrepancy":"","season_start":"05-01","season_end":"10-31","dates":[],"note":"A historic Montauk ranch 'house' and nature center at the far eastern tip of Long Island, where colonial-era cattle were once driven to graze on the open Montauk grasslands.","status":"event","verified":true},{"page":46,"name":"The Soldiers & Sailors","addr":"MEMORIAL BUILDING","town":"Huntington","lat":40.8682,"lng":-73.4257,"miles":999,"url":"www.huntingtonhistoricalsociety.org","phone":"","days":["tue","wed","thu","fri"],"hours":"1:00\u20134:00pm","kind":"regular","special":"","discrepancy":"","season_start":null,"season_end":null,"dates":[],"note":"The Huntington Historical Society's archive and gallery in the Soldiers & Sailors Memorial Building, with rotating exhibits on the town's founding era.","status":"weekday","verified":true}];
+
+const DAYS=['mon','tue','wed','thu','fri','sat','sun'];
+const DAYLABEL={mon:'Mon',tue:'Tue',wed:'Wed',thu:'Thu',fri:'Fri',sat:'Sat',sun:'Sun'};
+
+const state={q:'',day:'any',town:'',date:'',origin:null};
+
+/* ---------- town dropdown ---------- */
+(function(){
+  const towns=[...new Set(SITES.map(s=>s.town).filter(Boolean))].sort();
+  const sel=document.getElementById('town');
+  towns.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o);});
+})();
+
+/* ---------- helpers ---------- */
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function fullUrl(u){return u.startsWith('http')?u:'https://'+u;}
+function telHref(p){return 'tel:'+p.replace(/[^0-9]/g,'');}
+function haversine(a,b,c,d){const R=3959,r=Math.PI/180,dLat=(c-a)*r,dLng=(d-b)*r;const x=Math.sin(dLat/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin(dLng/2)**2;return R*2*Math.asin(Math.sqrt(x));}
+
+function inSeason(s,dateStr){
+  if(!s.season_start && !s.season_end) return true;
+  const md=dateStr.slice(5); // MM-DD
+  if(s.season_start && md < s.season_start) return false;
+  if(s.season_end && md > s.season_end) return false;
+  return true;
+}
+function dowOf(dateStr){const d=new Date(dateStr+'T12:00:00');return DAYS[(d.getDay()+6)%7];}
+
+/* openness for a specific date (used when a date is picked) */
+function openOnDate(s,dateStr){
+  if(!s.verified) return null;
+  if(s.dates && s.dates.includes(dateStr)) return true;
+  if(s.kind==='closed') return false;
+  if(!inSeason(s,dateStr)) return false;
+  const dow=dowOf(dateStr);
+  if(s.kind==='daily') return true;
+  if(s.days && s.days.length) {
+    // first-Sunday-of-month style special
+    if(s.special && /first sunday/i.test(s.special)){
+      const d=new Date(dateStr+'T12:00:00');
+      return dow==='sun' && d.getDate()<=7;
+    }
+    return s.days.includes(dow);
+  }
+  return null; // event/call with no weekly days -> unknown for that date
+}
+
+/* ---------- card ---------- */
+function statusSeal(s){
+  if(state.date){
+    const o=openOnDate(s,state.date);
+    if(o===true) return ['s-open','Open this date'];
+    if(o===false) return ['s-closed-today','Closed this date'];
+    if(s.kind==='event') return ['s-event','By event — check'];
+    if(s.kind==='call') return ['s-call','Call ahead'];
+    return ['s-unknown','Hours to confirm'];
+  }
+  const map={regular:['s-open','Regular hours'],daily:['s-open','Open daily'],event:['s-event','By event'],call:['s-call','Call ahead'],closed:['s-closed-today','Closed'],unknown:['s-unknown','Hours to confirm']};
+  return map[s.kind]||map.unknown;
+}
+
+function daysRow(s){
+  if(!s.days||!s.days.length) return '';
+  const pills=DAYS.map(d=>`<span class="daypill ${s.days.includes(d)?'':'off'}">${DAYLABEL[d][0]}</span>`).join('');
+  return `<div class="fact"><div class="k">Days</div><div class="v days">${pills}</div></div>`;
+}
+function factsBlock(s){
+  if(!s.verified) return `<div class="tbd">Hours to confirm — check the site</div>`;
+  let rows='';
+  rows+=daysRow(s);
+  if(s.hours) rows+=`<div class="fact"><div class="k">Hours</div><div class="v">${esc(s.hours)}</div></div>`;
+  if(s.season_start||s.season_end){
+    const fmt=m=>m?new Date('2026-'+m+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}):'';
+    const span=(s.season_start?fmt(s.season_start):'now')+' – '+(s.season_end?fmt(s.season_end):'year-end');
+    rows+=`<div class="fact"><div class="k">Season</div><div class="v">${span}</div></div>`;
+  }
+  if(s.dates&&s.dates.length){
+    const ds=s.dates.map(d=>new Date(d+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})).join(', ');
+    rows+=`<div class="fact"><div class="k">Date</div><div class="v">${ds}</div></div>`;
+  }
+  if(!rows) return '';
+  return `<div class="facts-wrap"><div class="facts-title">Hours available for stamp</div><div class="facts">${rows}</div></div>`;
+}
+
+function cardHTML(s){
+  const [cls,label]=statusSeal(s);
+  const dist = s._dist!=null ? `~${s._dist.toFixed(1)} mi` : `~${s.miles} mi`;
+  const special=s.special?`<div class="special"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M7 1.5l1.6 3.4 3.7.4-2.8 2.5.8 3.6L7 11.9 3.7 11.9l.8-3.6L1.7 5.3l3.7-.4z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg><span>${esc(s.special)}</span></div>`:'';
+  const discrepancy=s.discrepancy?`<div class="discrepancy"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M7 1.2L13 12H1z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/><path d="M7 5.5v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10.3" r="0.7" fill="currentColor"/></svg><span><b>Discrepancies exist.</b> ${esc(s.discrepancy)}</span></div>`:'';
+  const note=s.note?`<div class="note">${esc(s.note)}</div>`:'';
+  const meta=[];
+  if(s.addr) meta.push(`<a href="https://maps.google.com/?q=${encodeURIComponent(s.addr)}" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.5 1 2.5 3 2.5 5.5 2.5 9 7 13 7 13s4.5-4 4.5-7.5C11.5 3 9.5 1 7 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="5.5" r="1.6" stroke="currentColor" stroke-width="1.2"/></svg>${esc(s.addr)}</a>`);
+  if(s.phone) meta.push(`<a href="${telHref(s.phone)}"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M3 2.5c0 4.5 4 8.5 8.5 8.5l1-2-2.5-1-1 1c-1.5-.7-2.8-2-3.5-3.5l1-1L5.5 2 3 2.5z" stroke="currentColor" stroke-width="1.1"/></svg>${esc(s.phone)}</a>`);
+  if(s.url) meta.push(`<a href="${fullUrl(s.url)}" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.1"/><path d="M1.5 7h11M7 1.5c1.6 1.4 1.6 9.6 0 11M7 1.5c-1.6 1.4-1.6 9.6 0 11" stroke="currentColor" stroke-width="1.1"/></svg>${esc(s.url.replace(/^www\./,''))}</a>`);
+  return `<article class="card">
+    <div class="card-head"><div class="name">${esc(s.name)}</div><span class="pg">p.${s.page}</span></div>
+    <div class="card-body">
+      <div class="toprow"><span class="seal ${cls}">${label}</span><span class="dist">${dist}</span></div>
+      ${factsBlock(s)}
+      ${discrepancy}
+      ${special}
+      ${note}
+      <div class="meta">${meta.join('')}</div>
+    </div></article>`;
+}
+
+/* ---------- filter + sort ---------- */
+function matches(s){
+  if(state.date){
+    const o=openOnDate(s,state.date);
+    // when a date is chosen, hide things that are definitively closed that date
+    if(o===false) return false;
+  }
+  if(state.day!=='any'){
+    if(!s.days||!s.days.includes(state.day)) return false;
+  }
+  if(state.town && s.town!==state.town) return false;
+  if(state.q){
+    const hay=(s.name+' '+s.town+' '+s.addr+' '+s.note+' '+s.special).toLowerCase();
+    if(!hay.includes(state.q)) return false;
+  }
+  return true;
+}
+
+function render(){
+  let list=SITES.filter(matches);
+  if(state.origin){
+    list.forEach(s=>{s._dist=(s.lat!=null)?haversine(state.origin.lat,state.origin.lng,s.lat,s.lng):9999;});
+    list.sort((a,b)=>a._dist-b._dist);
+  } else {
+    list.forEach(s=>s._dist=null);
+    list.sort((a,b)=>a.miles-b.miles||a.page-b.page);
+  }
+  document.getElementById('grid').innerHTML=list.map(cardHTML).join('');
+  document.getElementById('empty').style.display=list.length?'none':'block';
+  let ctx=[];
+  if(state.date){const d=new Date(state.date+'T12:00:00');ctx.push('open '+d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}));}
+  else if(state.day!=='any') ctx.push('open '+DAYLABEL[state.day]);
+  if(state.origin) ctx.push('nearest to your address'); else ctx.push('nearest first');
+  document.getElementById('count').innerHTML=`Showing <b>${list.length}</b> of ${SITES.length} sites, ${ctx.join(', ')}`;
+}
+
+/* ---------- geocode (our Vercel function; key stays server-side) ---------- */
+async function geocode(q){
+  const r=await fetch('/api/geocode?q='+encodeURIComponent(q));
+  if(!r.ok) return null;
+  const j=await r.json();
+  if(!j||j.lat==null) return null;
+  return {lat:j.lat,lng:j.lng,label:j.label};
+}
+function setOrigin(o,nameForPill){
+  state.origin=o;
+  const pill=document.getElementById('originPill');
+  pill.style.display='inline-flex';
+  document.getElementById('originName').textContent=nameForPill;
+  render();
+}
+async function doLocate(){
+  const q=document.getElementById('addr').value.trim();
+  if(!q) return;
+  const msg=document.getElementById('geoMsg');
+  msg.style.display='inline';msg.textContent='Locating…';
+  try{
+    const o=await geocode(q);
+    if(!o){msg.textContent='Address not found — try adding a town or ZIP.';return;}
+    msg.style.display='none';
+    setOrigin({lat:o.lat,lng:o.lng}, q);
+  }catch(e){msg.textContent='Lookup failed — check your connection.';}
+}
+
+/* ---------- events ---------- */
+document.getElementById('locateBtn').addEventListener('click',doLocate);
+document.getElementById('addr').addEventListener('keydown',e=>{if(e.key==='Enter')doLocate();});
+document.getElementById('gpsBtn').addEventListener('click',()=>{
+  const msg=document.getElementById('geoMsg');
+  if(!navigator.geolocation){msg.style.display='inline';msg.textContent='Geolocation unavailable.';return;}
+  msg.style.display='inline';msg.textContent='Getting your location…';
+  navigator.geolocation.getCurrentPosition(
+    p=>{msg.style.display='none';setOrigin({lat:p.coords.latitude,lng:p.coords.longitude},'your location');},
+    ()=>{msg.textContent='Could not get location — enter an address instead.';}
+  );
+});
+document.getElementById('clearOrigin').addEventListener('click',()=>{
+  state.origin=null;document.getElementById('originPill').style.display='none';
+  document.getElementById('addr').value='';render();
+});
+document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value.trim().toLowerCase();render();});
+document.getElementById('town').addEventListener('change',e=>{state.town=e.target.value;render();});
+document.getElementById('datePick').addEventListener('change',e=>{
+  state.date=e.target.value;
+  if(state.date){state.day='any';[...document.getElementById('dayseg').children].forEach(x=>x.setAttribute('aria-pressed',x.dataset.day==='any'));}
+  render();
+});
+document.getElementById('clearDate').addEventListener('click',()=>{state.date='';document.getElementById('datePick').value='';render();});
+document.getElementById('dayseg').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  state.day=b.dataset.day;
+  if(state.day!=='any'){state.date='';document.getElementById('datePick').value='';}
+  [...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x===b));
+  render();
+});
+
+render();
+
+/* ---------- about modal ---------- */
+const modal=document.getElementById('aboutModal');
+function openModal(){modal.hidden=false;document.body.style.overflow='hidden';}
+function closeModal(){modal.hidden=true;document.body.style.overflow='';}
+document.getElementById('aboutOpen').addEventListener('click',openModal);
+document.getElementById('aboutClose').addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)closeModal();});
+
+</script>
+</body>
+</html>
