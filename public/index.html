@@ -253,7 +253,8 @@ footer{border-top:2px solid var(--ink);background:var(--paper);padding:24px 20px
         <button data-day="sat" aria-pressed="false">S</button>
         <button data-day="sun" aria-pressed="false">S</button>
       </div>
-      <select class="town" id="town" aria-label="Filter by town"><option value="">All towns</option></select>
+      <select class="town" id="municipality" aria-label="Filter by municipality"><option value="">All municipalities</option></select>
+      <select class="town" id="town" aria-label="Filter by town, hamlet, or village"><option value="">All places</option></select>
     </div>
     <div class="count-line" id="count"></div>
   </div>
@@ -279,10 +280,36 @@ const SITES=[{"page":42,"name":"The Arsenal","addr":"425 Park Avenue, Huntington
 const DAYS=['mon','tue','wed','thu','fri','sat','sun'];
 const DAYLABEL={mon:'Mon',tue:'Tue',wed:'Wed',thu:'Thu',fri:'Fri',sat:'Sat',sun:'Sun'};
 
-const state={q:'',day:'any',town:'',date:'',origin:null};
+const MUNICIPALITY_BY_PLACE={
+  'Amityville':'Town of Babylon','Babylon':'Town of Babylon','Lindenhurst':'Town of Babylon',
+  'Bellport':'Town of Brookhaven','Coram':'Town of Brookhaven','East Patchogue':'Town of Brookhaven','East Setauket':'Town of Brookhaven','Mastic Beach':'Town of Brookhaven','Miller Place':'Town of Brookhaven','Patchogue':'Town of Brookhaven','Port Jefferson':'Town of Brookhaven','Rocky Point':'Town of Brookhaven','Setauket':'Town of Brookhaven','Shirley':'Town of Brookhaven','Shoreham':'Town of Brookhaven','Stony Brook':'Town of Brookhaven','Yaphank':'Town of Brookhaven',
+  'East Hampton':'Town of East Hampton','Montauk':'Town of East Hampton',
+  'Centerport':'Town of Huntington','Cold Spring Harbor':'Town of Huntington','Greenlawn':'Town of Huntington','Huntington':'Town of Huntington','Huntington Station':'Town of Huntington','Lloyd Harbor':'Town of Huntington','Northport':'Town of Huntington',
+  'Central Islip':'Town of Islip','Oakdale':'Town of Islip','Sayville':'Town of Islip','West Bay Shore':'Town of Islip',
+  'Riverhead':'Town of Riverhead','Wading River':'Town of Riverhead',
+  'Shelter Island':'Town of Shelter Island',
+  'Hauppauge':'Town of Smithtown','Kings Park':'Town of Smithtown','Nissequogue':'Town of Smithtown','Smithtown':'Town of Smithtown','St. James':'Town of Smithtown',
+  'Bridgehampton':'Town of Southampton','Quogue':'Town of Southampton','Sag Harbor':'Town of Southampton','Southampton':'Town of Southampton','Water Mill':'Town of Southampton','Westhampton':'Town of Southampton',
+  'Cutchogue':'Town of Southold','Greenport':'Town of Southold','Mattituck':'Town of Southold','Orient':'Town of Southold','Southold':'Town of Southold',
+  'Freeport':'Town of Hempstead','Lawrence':'Town of Hempstead','Valley Stream':'Town of Hempstead',
+  'Roslyn':'Town of North Hempstead',
+  'Jericho':'Town of Oyster Bay','Oyster Bay':'Town of Oyster Bay',
+  'Glen Cove':'City of Glen Cove'
+};
+SITES.forEach(s=>{s.municipality=MUNICIPALITY_BY_PLACE[s.town]||'Municipality to confirm';});
 
-/* ---------- town dropdown ---------- */
+const state={q:'',day:'any',town:'',municipality:'',date:'',origin:null};
+
+/* ---------- place + municipality dropdowns ---------- */
 (function(){
+  const municipalityOrder=[
+    'Town of Babylon','Town of Brookhaven','Town of East Hampton','Town of Huntington','Town of Islip','Town of Riverhead','Town of Shelter Island','Town of Smithtown','Town of Southampton','Town of Southold',
+    'Town of Hempstead','Town of North Hempstead','Town of Oyster Bay','City of Glen Cove','Municipality to confirm'
+  ];
+  const munSel=document.getElementById('municipality');
+  municipalityOrder.filter(m=>SITES.some(s=>s.municipality===m)).forEach(m=>{
+    const o=document.createElement('option');o.value=m;o.textContent=m;munSel.appendChild(o);
+  });
   const towns=[...new Set(SITES.map(s=>s.town).filter(Boolean))].sort();
   const sel=document.getElementById('town');
   towns.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o);});
@@ -391,9 +418,10 @@ function matches(s){
   if(state.day!=='any'){
     if(!s.days||!s.days.includes(state.day)) return false;
   }
+  if(state.municipality && s.municipality!==state.municipality) return false;
   if(state.town && s.town!==state.town) return false;
   if(state.q){
-    const hay=(s.name+' '+s.town+' '+s.addr+' '+s.note+' '+s.special).toLowerCase();
+    const hay=(s.name+' '+s.town+' '+s.municipality+' '+s.addr+' '+s.note+' '+s.special).toLowerCase();
     if(!hay.includes(state.q)) return false;
   }
   return true;
@@ -413,6 +441,8 @@ function render(){
   let ctx=[];
   if(state.date){const d=new Date(state.date+'T12:00:00');ctx.push('open '+d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}));}
   else if(state.day!=='any') ctx.push('open '+DAYLABEL[state.day]);
+  if(state.municipality) ctx.push(state.municipality);
+  if(state.town) ctx.push(state.town);
   if(state.origin) ctx.push('nearest to your address'); else ctx.push('nearest first');
   document.getElementById('count').innerHTML=`Showing <b>${list.length}</b> of ${SITES.length} sites, ${ctx.join(', ')}`;
 }
@@ -462,6 +492,7 @@ document.getElementById('clearOrigin').addEventListener('click',()=>{
   document.getElementById('addr').value='';render();
 });
 document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value.trim().toLowerCase();render();});
+document.getElementById('municipality').addEventListener('change',e=>{state.municipality=e.target.value;render();});
 document.getElementById('town').addEventListener('change',e=>{state.town=e.target.value;render();});
 document.getElementById('datePick').addEventListener('change',e=>{
   state.date=e.target.value;
