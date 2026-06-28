@@ -44,6 +44,8 @@ h1.title em{font-style:italic;color:var(--blue)}
 .byline{display:flex;justify-content:flex-end;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
 .byline-txt{font-family:'Bitter',sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--quiet)}
 .byline-txt b{color:var(--ink-soft);font-weight:700}
+.byline-txt a{color:inherit;text-decoration:none}
+.byline-txt a:hover{color:var(--blue);text-decoration:underline}
 .contact-btn{display:inline-flex;align-items:center;gap:7px;font-family:'Bitter',sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);text-decoration:none;border:1px solid var(--line);background:var(--linen-2);border-radius:2px;padding:6px 11px;transition:background .12s,border-color .12s}
 .contact-btn:hover{background:var(--blue);color:#F6F1E6;border-color:var(--blue)}
 .contact-btn svg{flex:0 0 14px}
@@ -194,7 +196,7 @@ footer{border-top:2px solid var(--ink);background:var(--paper);padding:24px 20px
 <header class="masthead">
   <div class="masthead-inner">
     <div class="byline">
-      <span class="byline-txt">By <b>Andre Moskowitz</b> &middot; built with <b>OpenAI Codex</b></span>
+      <span class="byline-txt">By <a href="https://andremosk.com" target="_blank" rel="noopener"><b>Andre Moskowitz</b></a> &middot; built with <b>OpenAI Codex</b></span>
       <a class="contact-btn" href="mailto:andre.moskowitz@gmail.com?subject=Long%20Island%20250%20Stamp%20Finder%20%E2%80%94%20question%2Fsuggestion">
         <svg viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 4l6 4.5L14 4" stroke="currentColor" stroke-width="1.3"/></svg>
         Contact
