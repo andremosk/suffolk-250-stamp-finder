@@ -87,14 +87,13 @@ h1.title em{font-style:italic;color:var(--blue)}
 
 /* Controls */
 .controls{position:sticky;top:0;z-index:30;background:var(--linen);border-bottom:1px solid var(--line);box-shadow:0 6px 18px -14px #2b2315}
-.controls-inner{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;flex-direction:column;gap:11px}
+.controls-inner{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;flex-direction:column;gap:10px}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .field{display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:8px 12px}
 .field svg{flex:0 0 16px;opacity:.5}
 .field input{border:none;background:none;outline:none;width:100%;font-family:'Spectral';font-size:15px;color:var(--ink)}
 .field input::placeholder{color:var(--quiet);font-style:italic}
 .addr-field{flex:1 1 300px}
-.search-field{flex:1 1 200px}
 .btn{font-family:'Bitter';font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:9px 14px;border:1px solid var(--blue);background:var(--blue);color:#F6F1E6;cursor:pointer;border-radius:2px;white-space:nowrap;transition:background .12s}
 .btn:hover{background:var(--blue-deep)}
 .btn.ghost{background:none;color:var(--ink-soft);border-color:var(--line)}
@@ -108,6 +107,7 @@ h1.title em{font-style:italic;color:var(--blue)}
 .dateField input[type=date]{border:none;background:none;outline:none;font-family:'Bitter';font-size:12px;color:var(--ink);letter-spacing:.03em}
 .dateField label{font-family:'Bitter';font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet)}
 select.town{font-family:'Bitter';font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;padding:8px 30px 8px 12px;border:1px solid var(--line);border-radius:2px;background:var(--paper);color:var(--ink-soft);cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236E6354' fill='none' stroke-width='1.4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center}
+#municipality{min-width:220px}
 .origin-pill{font-family:'Bitter';font-size:11px;letter-spacing:.04em;color:var(--blue);background:#E0E7F0;border:1px solid #c2d0e0;border-radius:2px;padding:6px 10px;display:none;align-items:center;gap:8px}
 .origin-pill b{font-weight:700}
 .origin-pill button{border:none;background:none;color:var(--oxblood);cursor:pointer;font-size:14px;line-height:1;padding:0}
@@ -171,6 +171,20 @@ footer{border-top:2px solid var(--ink);background:var(--paper);padding:24px 20px
 @media (max-width:560px){
   .grid{grid-template-columns:1fr}
   .stat{min-width:50%;flex:1 1 40%}
+  .controls-inner{padding:10px 14px;gap:8px}
+  .row{gap:7px}
+  .field{padding:7px 10px}
+  .field input{font-size:14px}
+  .addr-field{flex:1 1 100%}
+  .btn{font-size:10px;padding:8px 10px;flex:1 1 calc(50% - 7px)}
+  .dateField{flex:1 1 100%;padding:6px 10px}
+  .dateField input[type=date]{min-width:0;flex:1}
+  .dateField .btn{flex:0 0 auto;padding:5px 8px}
+  .seg{width:100%;display:grid;grid-template-columns:1.9fr repeat(7,1fr)}
+  .seg button{padding:7px 0;font-size:10px}
+  select.town{width:100%;font-size:10.5px;padding:7px 30px 7px 10px}
+  .count-line{font-size:10px;line-height:1.35}
+  main{padding-top:16px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -234,10 +248,6 @@ footer{border-top:2px solid var(--ink);background:var(--paper);padding:24px 20px
       <span class="origin-pill" id="originPill"><span>Nearest to <b id="originName"></b></span><button id="clearOrigin" title="Clear">&times;</button></span>
     </div>
     <div class="row">
-      <label class="field search-field">
-        <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5"/></svg>
-        <input id="q" type="search" placeholder="Search a site or town&hellip;" autocomplete="off">
-      </label>
       <div class="dateField">
         <label for="datePick">On date</label>
         <input type="date" id="datePick" min="2026-06-01" max="2026-09-30">
@@ -254,7 +264,6 @@ footer{border-top:2px solid var(--ink);background:var(--paper);padding:24px 20px
         <button data-day="sun" aria-pressed="false">S</button>
       </div>
       <select class="town" id="municipality" aria-label="Filter by municipality"><option value="">All municipalities</option></select>
-      <select class="town" id="town" aria-label="Filter by town, hamlet, or village"><option value="">All places</option></select>
     </div>
     <div class="count-line" id="count"></div>
   </div>
@@ -298,9 +307,9 @@ const MUNICIPALITY_BY_PLACE={
 };
 SITES.forEach(s=>{s.municipality=MUNICIPALITY_BY_PLACE[s.town]||'Municipality to confirm';});
 
-const state={q:'',day:'any',town:'',municipality:'',date:'',origin:null};
+const state={day:'any',municipality:'',date:'',origin:null};
 
-/* ---------- place + municipality dropdowns ---------- */
+/* ---------- municipality dropdown ---------- */
 (function(){
   const municipalityOrder=[
     'Town of Babylon','Town of Brookhaven','Town of East Hampton','Town of Huntington','Town of Islip','Town of Riverhead','Town of Shelter Island','Town of Smithtown','Town of Southampton','Town of Southold',
@@ -310,9 +319,6 @@ const state={q:'',day:'any',town:'',municipality:'',date:'',origin:null};
   municipalityOrder.filter(m=>SITES.some(s=>s.municipality===m)).forEach(m=>{
     const o=document.createElement('option');o.value=m;o.textContent=m;munSel.appendChild(o);
   });
-  const towns=[...new Set(SITES.map(s=>s.town).filter(Boolean))].sort();
-  const sel=document.getElementById('town');
-  towns.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o);});
 })();
 
 /* ---------- helpers ---------- */
@@ -419,11 +425,6 @@ function matches(s){
     if(!s.days||!s.days.includes(state.day)) return false;
   }
   if(state.municipality && s.municipality!==state.municipality) return false;
-  if(state.town && s.town!==state.town) return false;
-  if(state.q){
-    const hay=(s.name+' '+s.town+' '+s.municipality+' '+s.addr+' '+s.note+' '+s.special).toLowerCase();
-    if(!hay.includes(state.q)) return false;
-  }
   return true;
 }
 
@@ -442,7 +443,6 @@ function render(){
   if(state.date){const d=new Date(state.date+'T12:00:00');ctx.push('open '+d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}));}
   else if(state.day!=='any') ctx.push('open '+DAYLABEL[state.day]);
   if(state.municipality) ctx.push(state.municipality);
-  if(state.town) ctx.push(state.town);
   if(state.origin) ctx.push('nearest to your address'); else ctx.push('nearest first');
   document.getElementById('count').innerHTML=`Showing <b>${list.length}</b> of ${SITES.length} sites, ${ctx.join(', ')}`;
 }
@@ -491,9 +491,7 @@ document.getElementById('clearOrigin').addEventListener('click',()=>{
   state.origin=null;document.getElementById('originPill').style.display='none';
   document.getElementById('addr').value='';render();
 });
-document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value.trim().toLowerCase();render();});
 document.getElementById('municipality').addEventListener('change',e=>{state.municipality=e.target.value;render();});
-document.getElementById('town').addEventListener('change',e=>{state.town=e.target.value;render();});
 document.getElementById('datePick').addEventListener('change',e=>{
   state.date=e.target.value;
   if(state.date){state.day='any';[...document.getElementById('dayseg').children].forEach(x=>x.setAttribute('aria-pressed',x.dataset.day==='any'));}
