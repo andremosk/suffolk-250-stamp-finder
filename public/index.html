@@ -116,18 +116,29 @@ select.town{font-family:'Bitter';font-size:11.5px;letter-spacing:.04em;text-tran
 .count-line{font-family:'Bitter';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet)}
 .count-line b{color:var(--oxblood);font-weight:700}
 .geo-msg{font-family:'Bitter';font-size:11px;letter-spacing:.04em;color:var(--oxblood);display:none}
+.progress-pill{font-family:'Bitter';font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-deep);background:#E0E7F0;border:1px solid #c2d0e0;border-radius:2px;padding:7px 10px}
+.progress-pill b{color:var(--oxblood)}
 
 /* Grid + cards */
 main{padding:26px 0 60px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .12s,box-shadow .12s}
 .card:hover{transform:translateY(-2px);box-shadow:0 1px 0 #fff8,0 10px 26px #2b231522}
+.card.stamped{border-color:#9fb58e;background:#F4F3E6}
 .card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:14px 16px 10px;border-bottom:1px dashed var(--line)}
+.card-title{display:flex;flex-direction:column;gap:6px;min-width:0}
+.stamp-status{font-family:'Bitter';font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok);display:none}
+.card.stamped .stamp-status{display:inline-flex;align-items:center;gap:5px}
+.card.stamped .stamp-status::before{content:'\2713';font-size:10px}
 .pg{font-family:'Bitter';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);border:1px solid var(--line);border-radius:2px;padding:2px 6px;white-space:nowrap;flex:0 0 auto}
 .name{font-family:'Bitter';font-weight:700;font-size:16.5px;line-height:1.18;letter-spacing:-.005em}
 .card-body{padding:12px 16px 14px;display:flex;flex-direction:column;gap:10px;flex:1}
 .toprow{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .dist{font-family:'Bitter';font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--oxblood);font-weight:600;white-space:nowrap}
+.stamp-action{font-family:'Bitter';font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);background:var(--linen-2);border:1px solid var(--line);border-radius:2px;padding:7px 9px;cursor:pointer;text-align:center;transition:background .12s,color .12s,border-color .12s}
+.stamp-action:hover{background:var(--blue);border-color:var(--blue);color:#F6F1E6}
+.stamp-action[aria-pressed=true]{background:var(--ok-bg);border-color:#bcd2bd;color:var(--ok)}
+.stamp-action[aria-pressed=true]:hover{background:#d4e3ce}
 
 /* structured info table */
 .facts-wrap{display:flex;flex-direction:column;gap:5px}
@@ -184,7 +195,9 @@ footer{border-top:2px solid var(--ink);background:var(--paper);padding:24px 20px
   .dateField .btn{flex:0 0 auto;padding:5px 8px}
   .seg{width:100%;display:grid;grid-template-columns:1.9fr repeat(7,1fr)}
   .seg button{padding:7px 0;font-size:10px}
+  #stampseg{grid-template-columns:repeat(3,1fr)}
   select.town{width:100%;font-size:10.5px;padding:7px 30px 7px 10px}
+  .progress-pill{width:100%;text-align:center}
   .count-line{font-size:10px;line-height:1.35}
   main{padding-top:16px}
 }
@@ -267,6 +280,14 @@ footer{border-top:2px solid var(--ink);background:var(--paper);padding:24px 20px
       </div>
       <select class="town" id="municipality" aria-label="Filter by municipality"><option value="">All municipalities</option></select>
     </div>
+    <div class="row">
+      <div class="seg" id="stampseg" role="group" aria-label="Filter by stamp progress">
+        <button data-stamp-filter="all" aria-pressed="true">All sites</button>
+        <button data-stamp-filter="needed" aria-pressed="false">Need stamp</button>
+        <button data-stamp-filter="stamped" aria-pressed="false">Stamped</button>
+      </div>
+      <span class="progress-pill" id="progressPill">Stamped <b>0</b> of 0</span>
+    </div>
     <div class="count-line" id="count"></div>
   </div>
 </section>
@@ -307,9 +328,16 @@ const MUNICIPALITY_BY_PLACE={
   'Farmingdale':'Town of Oyster Bay','Jericho':'Town of Oyster Bay','Oyster Bay':'Town of Oyster Bay',
   'Glen Cove':'City of Glen Cove'
 };
-SITES.forEach(s=>{s.municipality=MUNICIPALITY_BY_PLACE[s.town]||'Municipality to confirm';});
+function siteKey(s){return `${s.page}-${s.name}`.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+SITES.forEach(s=>{s.municipality=MUNICIPALITY_BY_PLACE[s.town]||'Municipality to confirm';s.key=siteKey(s);});
 
-const state={siteQuery:'',day:'any',municipality:'',date:'',origin:null};
+const STAMP_STORAGE_KEY='li250_stamped_sites_v1';
+function loadStampedSites(){
+  try{return new Set(JSON.parse(localStorage.getItem(STAMP_STORAGE_KEY)||'[]'));}
+  catch(e){return new Set();}
+}
+function saveStampedSites(){localStorage.setItem(STAMP_STORAGE_KEY,JSON.stringify([...state.stamped]));}
+const state={siteQuery:'',day:'any',municipality:'',date:'',origin:null,stampFilter:'all',stamped:loadStampedSites()};
 
 /* ---------- municipality dropdown ---------- */
 (function(){
@@ -404,6 +432,7 @@ function factsBlock(s){
 function cardHTML(s){
   const [cls,label]=statusSeal(s);
   const dist = s._dist!=null ? `~${s._dist.toFixed(1)} mi` : `~${s.miles} mi`;
+  const isStamped=state.stamped.has(s.key);
   const special=s.special?`<div class="special"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M7 1.5l1.6 3.4 3.7.4-2.8 2.5.8 3.6L7 11.9 3.7 11.9l.8-3.6L1.7 5.3l3.7-.4z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg><span>${esc(s.special)}</span></div>`:'';
   const discrepancy=s.discrepancy?`<div class="discrepancy"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M7 1.2L13 12H1z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/><path d="M7 5.5v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10.3" r="0.7" fill="currentColor"/></svg><span><b>Discrepancies exist.</b> ${esc(s.discrepancy)}</span></div>`:'';
   const note=s.note?`<div class="note">${esc(s.note)}</div>`:'';
@@ -411,10 +440,11 @@ function cardHTML(s){
   if(s.addr) meta.push(`<a href="https://maps.google.com/?q=${encodeURIComponent(s.addr)}" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.5 1 2.5 3 2.5 5.5 2.5 9 7 13 7 13s4.5-4 4.5-7.5C11.5 3 9.5 1 7 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="5.5" r="1.6" stroke="currentColor" stroke-width="1.2"/></svg>${esc(s.addr)}</a>`);
   if(s.phone) meta.push(`<a href="${telHref(s.phone)}"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M3 2.5c0 4.5 4 8.5 8.5 8.5l1-2-2.5-1-1 1c-1.5-.7-2.8-2-3.5-3.5l1-1L5.5 2 3 2.5z" stroke="currentColor" stroke-width="1.1"/></svg>${esc(s.phone)}</a>`);
   if(s.url) meta.push(`<a href="${fullUrl(s.url)}" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.1"/><path d="M1.5 7h11M7 1.5c1.6 1.4 1.6 9.6 0 11M7 1.5c-1.6 1.4-1.6 9.6 0 11" stroke="currentColor" stroke-width="1.1"/></svg>${esc(s.url.replace(/^www\./,''))}</a>`);
-  return `<article class="card">
-    <div class="card-head"><div class="name">${esc(s.name)}</div><span class="pg">p.${s.page}</span></div>
+  return `<article class="card ${isStamped?'stamped':''}">
+    <div class="card-head"><div class="card-title"><div class="name">${esc(s.name)}</div><span class="stamp-status">Stamped</span></div><span class="pg">p.${s.page}</span></div>
     <div class="card-body">
       <div class="toprow"><span class="seal ${cls}">${label}</span><span class="dist">${dist}</span></div>
+      <button class="stamp-action" type="button" data-site-key="${esc(s.key)}" aria-pressed="${isStamped?'true':'false'}">${isStamped?'Stamped in my passport':'Mark as stamped'}</button>
       ${factsBlock(s)}
       ${discrepancy}
       ${special}
@@ -426,6 +456,8 @@ function cardHTML(s){
 /* ---------- filter + sort ---------- */
 function matches(s){
   if(siteSearchActive() && !siteSearchText(s).includes(state.siteQuery)) return false;
+  if(state.stampFilter==='stamped' && !state.stamped.has(s.key)) return false;
+  if(state.stampFilter==='needed' && state.stamped.has(s.key)) return false;
   if(state.date){
     const o=openOnDate(s,state.date);
     // when a date is chosen, hide things that are definitively closed that date
@@ -454,8 +486,11 @@ function render(){
   else if(state.day!=='any') ctx.push('open '+DAYLABEL[state.day]);
   if(siteSearchActive()) ctx.push('matching &ldquo;'+esc(state.siteQuery)+'&rdquo;');
   if(state.municipality) ctx.push(state.municipality);
+  if(state.stampFilter==='stamped') ctx.push('stamped');
+  if(state.stampFilter==='needed') ctx.push('needing stamps');
   if(state.origin) ctx.push('nearest to your address'); else ctx.push('nearest first');
   document.getElementById('count').innerHTML=`Showing <b>${list.length}</b> of ${SITES.length} sites, ${ctx.join(', ')}`;
+  document.getElementById('progressPill').innerHTML=`Stamped <b>${state.stamped.size}</b> of ${SITES.length}`;
 }
 
 /* ---------- geocode (our Vercel function; key stays server-side) ---------- */
@@ -522,6 +557,19 @@ document.getElementById('dayseg').addEventListener('click',e=>{
   state.day=b.dataset.day;
   if(state.day!=='any'){state.date='';document.getElementById('datePick').value='';}
   [...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x===b));
+  render();
+});
+document.getElementById('stampseg').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  state.stampFilter=b.dataset.stampFilter;
+  [...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x===b));
+  render();
+});
+document.getElementById('grid').addEventListener('click',e=>{
+  const b=e.target.closest('.stamp-action');if(!b)return;
+  if(state.stamped.has(b.dataset.siteKey)) state.stamped.delete(b.dataset.siteKey);
+  else state.stamped.add(b.dataset.siteKey);
+  saveStampedSites();
   render();
 });
 
